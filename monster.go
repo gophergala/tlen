@@ -36,6 +36,10 @@ var scenario = SubAction{
 					},
 				},
 			},
+			Opened: func() interface{} {
+				// put some conditions here
+				return true
+			},
 		},
 		&SubAction{
 			Title:       "2",

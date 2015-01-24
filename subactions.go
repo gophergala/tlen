@@ -12,6 +12,7 @@ type SubActions []*SubAction
 
 type SubAction struct {
 	Title       string
+	Opened      func() interface{}
 	Description string
 	PreDraw     func(subaction *SubAction) bool
 	Answers     SubActions
@@ -32,6 +33,9 @@ func (handler SubActionButtonHandler) OnClick() {
 
 func (subactions *SubActions) Draw() {
 	for _, subaction := range *subactions {
+		if subaction.Opened != nil && !subaction.Opened().(bool) {
+			continue
+		}
 		button := createView("android.widget.Button").(sdk.Button)
 		button.SetText1s(subaction.Title)
 		android.OnClick(button, SubActionButtonHandler{
