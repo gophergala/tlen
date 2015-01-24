@@ -27,7 +27,7 @@ type Location struct {
 type Action struct {
 	Header      string
 	Description string
-	Callback    func()
+	Callback    func(action *Action)
 }
 
 var actions = map[string]*Action{
@@ -35,14 +35,12 @@ var actions = map[string]*Action{
 		Header:      "Hide all location buttons",
 		Description: "for testing",
 		Callback: func(action *Action) {
-			HideLocationButtons()
 		},
 	},
 	"customer": &Action{
 		Header:      "Dialog with customer",
 		Description: "",
 		Callback: func(action *Action) {
-			HideLocationButtons()
 		},
 	},
 }
@@ -105,7 +103,7 @@ func (handler ActionButtonHandler) OnClick() {
 
 	hideLocationButtons()
 
-	handler.action.Callback(action)
+	handler.action.Callback(handler.action)
 }
 
 var locationButtons []sdk.Button
@@ -205,9 +203,9 @@ func hideLocationButtons() {
 	}
 }
 
-var headerTextView := android.GetViewById(
+var headerTextView = android.GetViewById(
 		"main_layout", "header_text").(sdk.TextView)
-var	descTextView := android.GetViewById(
+var	descTextView = android.GetViewById(
 		"main_layout", "desc_text").(sdk.TextView)
 
 func start() {
