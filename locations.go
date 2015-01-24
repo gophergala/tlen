@@ -90,7 +90,7 @@ func (location *Location) Draw() {
 
 	indexLocations := 0
 	for _, locationName := range location.Locations {
-		loc := locations[locationName]
+		loc := Locations[locationName]
 
 		var button sdk.Button
 		var isNew bool

@@ -19,7 +19,7 @@ const (
 var HeaderTextView sdk.TextView
 var DescTextView sdk.TextView
 
-var locations = map[string]*Location{
+var Locations = map[string]*Location{
 	"shop": &Location{
 		Header:      "Shop",
 		Description: "Welcome to food shop. I have been shoped! Go to home.",
@@ -64,14 +64,21 @@ var locations = map[string]*Location{
 			"monster",
 		},
 	},
+	"game_boxes": &Location{
+		Header: "Boxes",
+		Description: "Stupid game",
+		Actions: []string{
+			"play",
+		},
+	},
 }
 
 var actions = map[string]*Action{
-	"monster": &Action{
+	"game_boxes": &Action{
 		Header:      "Dream",
 		Description: "for testing",
 		Callback: func(action *Action, button sdk.Button) {
-			InitDreamWithMonster(action, button)
+			InitPlayBoxes(action, button)
 		},
 	},
 }
@@ -82,7 +89,7 @@ func start() {
 	DescTextView = android.GetViewById(
 		"main_layout", "desc_text").(sdk.TextView)
 
-	origin := locations["imaginarium"]
+	origin := Locations["game_boxes"]
 	origin.Draw()
 }
 
