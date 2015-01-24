@@ -5,7 +5,7 @@
 	android:versionCode="1"
 	android:versionName="1.0">
 
-	<application android:label="goandroidrpc">
+	<application android:theme="@android:style/Theme.NoTitleBar">
 		<activity android:name="com.goandroidrpc.rpc.MainActivity"
 			android:label="goandroidrpc"
 			android:exported="true">
