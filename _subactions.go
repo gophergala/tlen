@@ -8,7 +8,7 @@ import (
 	"github.com/seletskiy/go-android-rpc/android/sdk"
 )
 
-type SubActions []*SubAction
+type BaseActions []*SubAction
 
 type SubAction struct {
 	Title       string

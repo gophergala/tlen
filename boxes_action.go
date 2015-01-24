@@ -5,18 +5,14 @@ import "log"
 type BoxesAction struct {
 }
 
-func (location BoxesAction) GetHeader() {
+func (action BoxesAction) GetButtonTitle() string {
 	return "Game of Boxes"
 }
 
-func (location BoxesAction) GetDescription() string {
-	return "Ta-ta ta-ta-ta-ta ta-ta"
-}
-
-func (location BoxesAction) Init() {
-
-}
-
-func (location BoxesAction) Run() {
+func (action BoxesAction) Run() {
 	log.Printf("%#v", "123")
+}
+
+func (action BoxesAction) GetLayoutName() string {
+	return "boxes_layout"
 }

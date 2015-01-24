@@ -5,7 +5,6 @@ import (
 
 	// required for linking
 	_ "github.com/seletskiy/go-android-rpc/android/modules"
-	"github.com/seletskiy/go-android-rpc/android/sdk"
 )
 
 const (
@@ -14,17 +13,11 @@ const (
 	ViewGone      = 8
 )
 
-type State struct {
-	Location Location
-	Action   Action
-}
-
-var HeaderTextView sdk.TextView
-var DescTextView sdk.TextView
-
 var locations = map[string]Location{
-	"game_room": &GameRoomLocation{},
-	"kitchen":   &KitchenLocation{},
+	"home":    NewTestLocation("home", "home desc"),
+	"kitchen": NewTestLocation("kitchen", "kitchen desc"),
+	"outside": NewTestLocation("outside", "outside desc"),
+	"shop":    NewTestLocation("shop", "shop desc"),
 }
 
 var actions = map[string]Action{
@@ -32,34 +25,32 @@ var actions = map[string]Action{
 }
 
 func init() {
-	locations["game_room"].LinkLocation(locations["kitchen"])
-	locations["game_room"].LinkAction(actions["boxes"])
+	locations["home"].LinkLocation(locations["kitchen"])
+	locations["home"].LinkLocation(locations["outside"])
+
+	locations["kitchen"].LinkLocation(locations["home"])
+
+	locations["outside"].LinkLocation(locations["shop"])
+	locations["outside"].LinkLocation(locations["home"])
+	locations["outside"].LinkLocation(locations["kitchen"])
+
+	locations["shop"].LinkLocation(locations["outside"])
+
+	// DANGEROUS
+	locations["kitchen"].LinkAction(actions["boxes"])
 }
 
-////var actions = map[string]*Action{
-////    "game_boxes": &GameBoxesAction{},
-////}
-
-//var actions = map[string]*Action{
-//    "game_boxes": &Action{
-//        Header:      "Dream",
-//        Description: "for testing",
-//        Callback: func(action *Action, button sdk.Button) {
-//            InitPlayBoxes(action, button)
-//        },
-//    },
-//}
+var game *Game
 
 func start() {
 	//locationButtons = []sdk.Button{}
 	//actionButtons = []sdk.Button{}
-	//HeaderTextView = android.GetViewById(
-	//    "main_layout", "header_text").(sdk.TextView)
-	//DescTextView = android.GetViewById(
-	//    "main_layout", "desc_text").(sdk.TextView)
 
 	//origin := Locations["game_room"]
 	//origin.Draw()
+	game = &Game{}
+	game.SetLocation(locations["home"])
+	game.Start()
 }
 
 func main() {

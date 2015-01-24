@@ -1,8 +1,7 @@
 package main
 
 type Action interface {
-	GetHeader() string
-	GetDescription() string
-	Init()
+	GetButtonTitle() string
+	GetLayoutName() string
 	Run()
 }
