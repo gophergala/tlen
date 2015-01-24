@@ -12,9 +12,9 @@ import (
 )
 
 const (
-	viewInvisible = 4
-	viewVisible   = 0
-	viewGone      = 8
+	ViewInvisible = 4
+	ViewVisible   = 0
+	ViewGone      = 8
 )
 
 type Location struct {
@@ -31,18 +31,11 @@ type Action struct {
 }
 
 var actions = map[string]*Action{
-	"hideButtons": &Action{
-		Header:      "Hide all location buttons",
+	"monster": &Action{
+		Header:      "Dream",
 		Description: "for testing",
 		Callback: func(action *Action, button sdk.Button) {
-			hideLocationButtons()
-		},
-	},
-	"customer": &Action{
-		Header:      "Dialog with customer",
-		Description: "",
-		Callback: func(action *Action, button sdk.Button) {
-			hideLocationButtons()
+			InitDreamWithMonster(action, button)
 		},
 	},
 	"playWithCat": &Action{
@@ -107,6 +100,13 @@ var locations = map[string]*Location{
 			"shop",
 		},
 	},
+	"imaginarium": &Location{
+		Header:      "Some Imaginarium",
+		Description: "Whatever",
+		Actions: []string{
+			"monster",
+		},
+	},
 }
 
 type NextButtonHandler struct {
@@ -123,10 +123,10 @@ type ActionButtonHandler struct {
 }
 
 func (handler ActionButtonHandler) OnClick() {
-	headerTextView.SetText1s(handler.action.Header)
-	descTextView.SetText1s(handler.action.Description)
+	HeaderTextView.SetText1s(handler.action.Header)
+	DescTextView.SetText1s(handler.action.Description)
 
-	hideLocationButtons()
+	hideLocation()
 
 	handler.action.Callback(handler.action, handler.button)
 }
@@ -151,7 +151,7 @@ func (location *Location) Draw() {
 			button = actionButtons[indexActions]
 
 			if button.IsShown()["result"] == "false" {
-				button.SetVisibility(viewVisible)
+				button.SetVisibility(ViewVisible)
 			}
 		}
 
@@ -162,7 +162,7 @@ func (location *Location) Draw() {
 		})
 
 		if isNew {
-			android.AttachView(button, strconv.Itoa(mainLayoutId))
+			android.AttachView(button, strconv.Itoa(MainLayoutId))
 			actionButtons = append(actionButtons, button)
 		}
 
@@ -172,7 +172,7 @@ func (location *Location) Draw() {
 
 	if indexActions < len(actionButtons) {
 		for i, _ := range actionButtons[indexActions:] {
-			actionButtons[indexActions+i].SetVisibility(viewGone)
+			actionButtons[indexActions+i].SetVisibility(ViewGone)
 		}
 	}
 
@@ -191,7 +191,7 @@ func (location *Location) Draw() {
 			button = locationButtons[indexLocations]
 
 			if button.IsShown()["result"] == "false" {
-				button.SetVisibility(viewVisible)
+				button.SetVisibility(ViewVisible)
 			}
 		}
 
@@ -202,7 +202,7 @@ func (location *Location) Draw() {
 		})
 
 		if isNew {
-			android.AttachView(button, strconv.Itoa(mainLayoutId))
+			android.AttachView(button, strconv.Itoa(MainLayoutId))
 			locationButtons = append(locationButtons, button)
 		}
 
@@ -211,34 +211,40 @@ func (location *Location) Draw() {
 
 	if indexLocations < len(locationButtons) {
 		for i, _ := range locationButtons[indexLocations:] {
-			locationButtons[indexLocations+i].SetVisibility(viewGone)
+			locationButtons[indexLocations+i].SetVisibility(ViewGone)
 		}
 	}
 
-	headerTextView.SetText1s(location.Header)
-	descTextView.SetText1s(location.Description)
+	HeaderTextView.SetText1s(location.Header)
+	DescTextView.SetText1s(location.Description)
 }
 
-func hideLocationButtons() {
+func hideLocation() {
+	for index, _ := range actionButtons {
+		if actionButtons[index].IsShown()["result"] == "true" {
+			actionButtons[index].SetVisibility(ViewGone)
+		}
+	}
+
 	for index, _ := range locationButtons {
 		if locationButtons[index].IsShown()["result"] == "true" {
-			locationButtons[index].SetVisibility(viewGone)
+			locationButtons[index].SetVisibility(ViewGone)
 		}
 	}
 }
 
-var headerTextView sdk.TextView
-var descTextView sdk.TextView
+var HeaderTextView sdk.TextView
+var DescTextView sdk.TextView
 
-var mainLayoutId = 0x7f030000
+const MainLayoutId = 0x7f030000
 
 func start() {
-	headerTextView = android.GetViewById(
+	HeaderTextView = android.GetViewById(
 		"main_layout", "header_text").(sdk.TextView)
-	descTextView = android.GetViewById(
+	DescTextView = android.GetViewById(
 		"main_layout", "desc_text").(sdk.TextView)
 
-	origin := locations["home"]
+	origin := locations["imaginarium"]
 	origin.Draw()
 }
 
