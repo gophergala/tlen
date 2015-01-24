@@ -8,7 +8,7 @@ Go-development, but it's very scarce, and lack of almost everything that you
 can use for app development. However, it contains strong foundation for
 building somethings bigger.
 
-So we decided to fix this unfortunate conincidence, and start developing
+So we decided to fix this unfortunate coincidence, and start developing
 Go [framework](https://github.com/seletskiy/go-android-rpc), that will bring
 native SDK to the [Go code](main.go).
 
