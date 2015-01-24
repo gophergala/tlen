@@ -21,6 +21,27 @@ type Location struct {
 	Header      string
 	Description string
 	Locations   []string
+	Actions     []string
+}
+
+type Action struct {
+	Header      string
+	Description string
+	Callback    func()
+}
+
+var actions = map[string]*Action{
+	"hideButtons": &Action{
+		Header:      "Hide all location buttons",
+		Description: "for testing",
+		Callback: func() {
+			for index, _ := range locationButtons {
+				if locationButtons[index].IsShown()["result"] == "true" {
+					locationButtons[index].SetVisibility(viewGone)
+				}
+			}
+		},
+	},
 }
 
 var locations = map[string]*Location{
@@ -37,6 +58,9 @@ var locations = map[string]*Location{
 		Locations: []string{
 			"outside",
 			"home",
+		},
+		Actions: []string{
+			"hideButtons",
 		},
 	},
 	"home": &Location{
@@ -65,25 +89,74 @@ func (handler NextButtonHandler) OnClick() {
 	handler.location.Draw()
 }
 
+type ActionButtonHandler struct {
+	action *Action
+}
+
+func (handler ActionButtonHandler) OnClick() {
+	handler.action.Callback()
+}
+
 var locationButtons []sdk.Button
+var actionButtons []sdk.Button
 
 func (location *Location) Draw() {
 	log.Printf("%#v\n", location)
 
-	index := 0
+	indexActions := 0
+	for _, actionName := range location.Actions {
+		action := actions[actionName]
+
+		var button sdk.Button
+		var isNew bool
+
+		if indexActions >= len(actionButtons) {
+			isNew = true
+			button = android.CreateView(
+				strconv.Itoa(200+indexActions), "android.widget.Button").(sdk.Button)
+		} else {
+			button = actionButtons[indexActions]
+
+			if button.IsShown()["result"] == "false" {
+				button.SetVisibility(viewVisible)
+			}
+		}
+
+		button.SetText1s(action.Header)
+
+		android.OnClick(button, ActionButtonHandler{
+			action,
+		})
+
+		if isNew {
+			android.AttachView(button, "2130903040")
+			actionButtons = append(actionButtons, button)
+		}
+
+		indexActions++
+
+	}
+
+	if indexActions < len(actionButtons) {
+		for i, _ := range actionButtons[indexActions:] {
+			actionButtons[indexActions+i].SetVisibility(viewGone)
+		}
+	}
+
+	indexLocations := 0
 	for _, locationName := range location.Locations {
 		loc := locations[locationName]
 
 		var button sdk.Button
 		var isNew bool
 
-		if index >= len(locationButtons) {
+		if indexLocations >= len(locationButtons) {
 			isNew = true
 			button = android.CreateView(
-				strconv.Itoa(100+index), "android.widget.Button").(sdk.Button)
+				strconv.Itoa(100+indexLocations), "android.widget.Button").(sdk.Button)
 		} else {
-			button = locationButtons[index]
-			log.Printf("%#v", button.IsShown())
+			button = locationButtons[indexLocations]
+
 			if button.IsShown()["result"] == "false" {
 				button.SetVisibility(viewVisible)
 			}
@@ -100,12 +173,12 @@ func (location *Location) Draw() {
 			locationButtons = append(locationButtons, button)
 		}
 
-		index++
+		indexLocations++
 	}
 
-	if index < len(locationButtons) {
-		for i, _ := range locationButtons[index:] {
-			locationButtons[index+i].SetVisibility(viewGone)
+	if indexLocations < len(locationButtons) {
+		for i, _ := range locationButtons[indexLocations:] {
+			locationButtons[indexLocations+i].SetVisibility(viewGone)
 		}
 	}
 
