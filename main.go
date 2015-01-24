@@ -40,6 +40,8 @@ var actions = map[string]*Action{
 }
 
 func start() {
+	locationButtons = []sdk.Button{}
+	actionButtons = []sdk.Button{}
 	HeaderTextView = android.GetViewById(
 		"main_layout", "header_text").(sdk.TextView)
 	DescTextView = android.GetViewById(
