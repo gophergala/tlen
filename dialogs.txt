@@ -1,0 +1,44 @@
+Prologue.
+
+It's been 45 years since the Expedition begun. The obvious
+and rationl evolution of human technologies allowed to build
+safe enough space ships to explore new worlds.
+
+A bunch of strong, hardly selected people started their journey
+cherishing hope to find new better planet to live. One way ticket.
+No way back.
+
+
+Monster location.
+
+The darkness is all around you. You try to make a move to escape,
+but barely feel your body. Just powerful clammy darkness and strange
+feeling of existence and non-existence at the same time.
+
+You feel different. Time goes different. You know it's thirteen
+and a half eternities passed before you were able to see.
+
+But your vision is not the regular human eyesight. It is something
+about your skin and your hearing, about all your brain cells.
+
+You start to feel yourself more clearly. Start to feel something
+around you. And you realize the something is alive.
+
+You don't need another eternity to understand that the something
+is deadly strange, deadly dark and deadly dangerous. You feel
+it doesn't even know about you, but even more you know it want
+you not to be.
+
+Choice: [fight], [run away].
+
+
+Stage 1. Dark object appeared far on the ship's way.
+Stage 2. Dark object is being slightly touched by spectroanalysis.
+It's a planet with a great chance to be settled.
+Stage 3. Deep research made it clear the planet's been destroyed
+and can't be settled. But there's some chance that resources
+from planet remainings can be used to refuel.
+Stage 4. Approaching the planet remainings shown that there is
+absolutely no chance to refuel and that the remainings belong
+to Earth.
+Stage 5. No hope. Ship is dying. No one to survive.
