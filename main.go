@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/seletskiy/go-android-rpc/android"
 
 	// required for linking
@@ -9,35 +11,47 @@ import (
 )
 
 const (
-	invisible = 4
-	visible   = 0
+	viewInvisible = 4
+	viewVisible   = 0
 )
 
 type Location struct {
-	Name        string
+	Header      string
 	Description string
-	Locations   []*Location
+	Locations   []string
 }
 
-var LocationShop = Location{
-	Name:        "Shop",
-	Description: "Welcome to food shop. I have been shoped! Go to home.",
-}
-
-var LocationKitchen = Location{
-	Name:        "Kitchen",
-	Description: "Kitchen. Your kholodilnik is empty",
-	Locations: []*Location{
-		&LocationShop,
+var locations = map[string]*Location{
+	"shop": &Location{
+		Header:      "Shop",
+		Description: "Welcome to food shop. I have been shoped! Go to home.",
+		Locations: []string{
+			"outside",
+		},
 	},
-}
-
-var LocationOrigin = Location{
-	Name:        "Origin",
-	Description: "You can go to kitchen or outside",
-	Locations: []*Location{
-		&LocationKitchen,
-		&LocationShop,
+	"kitchen": &Location{
+		Header:      "Kitchen",
+		Description: "Kitchen. Your kholodilnik is empty",
+		Locations: []string{
+			"outside",
+			"home",
+		},
+	},
+	"home": &Location{
+		Header:      "Home",
+		Description: "You can go to kitchen or outside",
+		Locations: []string{
+			"kitchen",
+			"outside",
+		},
+	},
+	"outside": &Location{
+		Header: "Outside",
+		Description: "Hello world!",
+		Locations: []string{
+			"home",
+			"shop",
+		},
 	},
 }
 
@@ -50,6 +64,7 @@ func (handler NextButtonHandler) OnClick() {
 }
 
 func (location *Location) Draw() {
+	log.Printf("%#v\n", location)
 	buttons := []sdk.Button{
 		android.GetViewById(
 			"main_layout", "choose_button_1").(sdk.Button),
@@ -61,21 +76,22 @@ func (location *Location) Draw() {
 
 	for _, button := range buttons {
 		button.SetText1s("")
-		button.SetVisibility(invisible)
+		button.SetVisibility(viewInvisible)
 	}
 
-	for index, loc := range location.Locations {
-		buttons[index].SetText1s(loc.Name)
-		buttons[index].SetVisibility(visible)
+	for index, locationName := range location.Locations {
+		loc := locations[locationName]
+			buttons[index].SetText1s(loc.Header)
+		buttons[index].SetVisibility(viewVisible)
 
 		android.OnClick(buttons[index], NextButtonHandler{
 			loc,
 		})
 	}
 
-	nameTextView := android.GetViewById(
-		"main_layout", "name_text").(sdk.TextView)
-	nameTextView.SetText1s(location.Name)
+	headerTextView := android.GetViewById(
+		"main_layout", "header_text").(sdk.TextView)
+	headerTextView.SetText1s(location.Header)
 
 	descTextView := android.GetViewById(
 		"main_layout", "desc_text").(sdk.TextView)
@@ -83,11 +99,10 @@ func (location *Location) Draw() {
 }
 
 func start() {
-	LocationShop.Locations = []*Location{
-		&LocationOrigin,
-	}
-
-	LocationOrigin.Draw()
+	log.Printf("%#v", locations)
+	origin := locations["home"]
+	log.Printf("%#v", origin)
+	origin.Draw()
 }
 
 func main() {

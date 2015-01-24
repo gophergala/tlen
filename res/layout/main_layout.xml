@@ -5,10 +5,10 @@
     android:orientation="vertical"
     android:id="@+id/main_layout" >
 
-    <TextView android:id="@+id/name_text"
+    <TextView android:id="@+id/header_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="some name" />
+        android:text="some header" />
 
     <TextView android:id="@+id/desc_text"
         android:layout_width="wrap_content"
