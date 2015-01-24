@@ -1,36 +1,173 @@
 Prologue.
 
 It's been 45 years since the Expedition begun. The obvious
-and rationl evolution of human technologies allowed to build
+and rational evolution of human technologies allowed to build
 safe enough space ships to explore new worlds.
 
 A bunch of strong, hardly selected people started their journey
-cherishing hope to find new better planet to live. One way ticket.
+cherishing hope to find new better home to live. One way ticket.
 No way back.
 
 
-Monster location.
+Monster action.
 
-The darkness is all around you. You try to make a move to escape,
+It is pitch black. You try to make a move to escape,
 but barely feel your body. Just powerful clammy darkness and strange
 feeling of existence and non-existence at the same time.
 
-You feel different. Time goes different. You know it's thirteen
-and a half eternities passed before you were able to see.
+1.1.[Try to move]
 
-But your vision is not the regular human eyesight. It is something
-about your skin and your hearing, about all your brain cells.
+You feel different. Time goes different. You feel your mind wandering.
+
+1.2.["Who are you?"]
+
+"You? Things? Cold. Solid. Energy. Dark."
+
+1.2.1.["Play."]
+1.2.2.["Toys."]
+1.2.3.["Father."]
+1.2.4.["Mother."]
+
+"Alive? Energy? Energy."
 
 You start to feel yourself more clearly. Start to feel something
 around you. And you realize the something is alive.
 
 You don't need another eternity to understand that the something
 is deadly strange, deadly dark and deadly dangerous. You feel
-it doesn't even know about you, but even more you know it want
+it doesn't even know who are you, but even more you know it want
 you not to be.
 
-Choice: [fight], [run away].
+2.[Run away]
 
+It is pitch black. There is nowhere to run.
+
+3.1.[Anger]
+
+You feel dark presence goes away.
+
+3.2.[Panic]
+
+You feel pain.
+
+3.2.1.[Anger]
+
+You feel dark presence goes away.
+
+You suddenly became aware of your body. Rumbling around you. Low and pleasant
+rumbling. R-r-r-r-r. Like a tiger. Like a... engines. Ginormous photon engines.
+You waking up.
+
+You see you father. You feel bright pain.
+
+4.[Cry]
+
+Your father looking at you with question in his eyes.
+
+"It's a just bad dream.", he says.
+
+5.["I fight with monster!"]
+
+You father taking you on your foots.
+
+6.["I feel pain!"]
+
+"You better see mom. She's our lovely doctor."
+
+7.1.["We are at home?"]
+
+"Not yet. But it looks like we are so close". Grin touches your fathers lips.
+
+7.2.[End]
+
+Father takes your away from Imaginarium and closes door on magnet lock.
+
+
+Ship. Family bunk location.
+
+You in your family bunk. You see cat. Door to Imaginarium is closed.
+
+1.1.["Hey, dad! The monster was sooo scary!"]
+
+"Huh?"
+
+Dad turns on TV. You hear how presenter of the TV program tells you about
+new planet, detected at the edge of the ship radars range.
+
+1.2.1.["He tries to hurt me! But I'm a brave boy."]
+1.2.2.["I was so scared!"]
+
+Dad is watching TV.
+
+"Go to see your mother. She will need to check you after hibernation."
+
+Presenter continues talking about all possibilities that awaits you and 3'000
+settlers on new planet.
+
+1.2.3.[Ignore TV and dad.]
+
+2.1.[Caress your cat.]
+
+Purr. {Vibrate, sound. `State.Cat++` in state}
+
+2.2.[Disregard your cat.]
+
+??? Random consequences? Lol.
+
+3.[Go outside].
+
+
+Lobby location.
+
+You in the lobby. You hear soft rumble of the engines, which carries you and
+your parents long before you came through darkness of the universe.
+
+One hundred steps upper and you will find yourself near captain's cabin. Halfway
+up located a big dinning room. You hear voices.
+
+Thin red lines along the walls will bring you to medcentre.
+
+1.1.[Go upward.]
+
+// to the upwards lobby
+
+1.2.[Go to the medroom.]
+
+// to the medroom
+
+{just once}
+1.3.[Stand still and listen to engines rumble.]
+
+R-r-r-r. You always like sound of the engines. Pretty much as anyone on the
+ship.
+
+1.* choices except 1.3.
+1.3.1.[Sit on the floor and listen.]
+
+You almost immerse in tender voice of engines. The tone is very low and deep.
+It covers you like silk blanket. You feel floor vibrating in almost negligible
+jolts with entraining repetitive pattern.
+
+{only if `State.Cat >= 1`}
+You see cat comes to you.
+
+1.3.1.1.[Ignore cat and pay attention to vibrating pattern on the floor.]
+You feel anxiety. You always liked engines and how they sound. In place you
+uneasy.
+
+{`State.Anxiety++`}
+
+1.3.2.[Let cat on your knees.]
+
+{Vibrate. `State.Cat++`}
+{/if}
+{/end}
+
+1.4.[Listen to the distant voices.]
+
+Distance laugh. You did not remember, when you hear that last time.
+
+{`State.Interest++`}
 
 Stage 1. Dark object appeared far on the ship's way.
 Stage 2. Dark object is being slightly touched by spectroanalysis.
