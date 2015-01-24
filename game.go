@@ -20,8 +20,8 @@ type Game struct {
 	headerView sdk.TextView
 	descView   sdk.TextView
 
-	viewId  int
-	viewIds []string
+	viewId      int
+	viewObjects []interface{}
 
 	LocationOnClickHandler GameLocationOnClickHandler
 	ActionOnClickHandler   GameActionOnClickHandler
@@ -62,10 +62,7 @@ func (game *Game) Start() {
 }
 
 func (game *Game) ClearViews() {
-	log.Printf("%#v\n", game.viewIds)
-	for _, id := range game.viewIds {
-		view := android.GetViewById(game.state.LayoutName, id)
-		log.Printf("%#v\n", view)
+	for _, view := range game.viewObjects {
 		switch view.(type) {
 		case sdk.TextView:
 			view.(sdk.TextView).SetVisibility(ViewGone)
@@ -77,7 +74,7 @@ func (game *Game) ClearViews() {
 		}
 	}
 
-	game.viewIds = make([]string, 0)
+	game.viewObjects = make([]interface{}, 0)
 }
 
 func (game *Game) SwitchLocation() {
@@ -148,13 +145,10 @@ func (handler GameActionOnClickHandler) OnClick() {
 
 func (game *Game) CreateView(viewName string) interface{} {
 	game.viewId++
-
 	id := strconv.Itoa(game.viewId)
-	game.viewIds = append(game.viewIds, id)
-	log.Printf("craeted %#v\n", id)
-	log.Printf("%#v\n", game.viewIds)
-
-	return android.CreateView(id, viewName)
+	created := android.CreateView(id, viewName)
+	game.viewObjects = append(game.viewObjects, created)
+	return created
 }
 
 func (game *Game) AttachView(view sdk.View) {
