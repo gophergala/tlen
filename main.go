@@ -7,6 +7,22 @@ type Scene struct {
 	Next *Scene
 }
 
+func (scene *Scene) Run() {
+	for {
+		text := scene.GetText()
+
+		if text == "" {
+			break
+		}
+
+		fmt.Println(text)
+	}
+
+	if scene.Next != nil {
+		scene.Next.Run()
+	}
+}
+
 func (scene *Scene) GetText() string {
 	if len(scene.Plot) == 0 {
 		return ""
@@ -17,22 +33,22 @@ func (scene *Scene) GetText() string {
 }
 
 func main() {
-	Scene := &Scene{
+	SceneOne := &Scene{
 		Plot: []string{
 			"welcome to tlen",
 			"enjoy the ride",
 		},
 	}
 
-	for {
-		text := Scene.GetText()
-
-		if text == "" {
-			break
-		}
-
-		fmt.Println(text)
+	SceneTwo := &Scene{
+		Plot: []string{
+			"30 years ago...",
+		},
 	}
+
+	SceneOne.Next = SceneTwo
+
+	SceneOne.Run()
 
 	fmt.Println("\ngame over")
 }
