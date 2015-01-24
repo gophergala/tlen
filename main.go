@@ -83,7 +83,8 @@ func (location *Location) Draw() {
 				strconv.Itoa(100+index), "android.widget.Button").(sdk.Button)
 		} else {
 			button = locationButtons[index]
-			if !button.IsShown() {
+			log.Printf("%#v", button.IsShown())
+			if button.IsShown()["result"] == "false" {
 				button.SetVisibility(viewVisible)
 			}
 		}
@@ -95,7 +96,7 @@ func (location *Location) Draw() {
 		})
 
 		if isNew {
-			android.AttachView(button, "2130837504")
+			android.AttachView(button, "2130903040")
 			locationButtons = append(locationButtons, button)
 		}
 
