@@ -24,7 +24,7 @@ func InitPlayBoxes(action *Action, button sdk.Button) {
 				&SubAction{
 					Title: "Exit",
 					PreDraw: func(subaction *SubAction) bool {
-						origin := Locations["home"]
+						origin := Locations["game_room"]
 						origin.Draw()
 						return false
 					},

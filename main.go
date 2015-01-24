@@ -20,55 +20,11 @@ var HeaderTextView sdk.TextView
 var DescTextView sdk.TextView
 
 var Locations = map[string]*Location{
-	"shop": &Location{
-		Header:      "Shop",
-		Description: "Welcome to food shop. I have been shoped! Go to home.",
-		Locations: []string{
-			"outside",
-		},
-		Actions: []string{
-			"customer",
-		},
-	},
-	"kitchen": &Location{
-		Header:      "Kitchen",
-		Description: "Kitchen. Your kholodilnik is empty",
-		Locations: []string{
-			"outside",
-			"home",
-		},
-		Actions: []string{
-			"hideButtons",
-		},
-	},
-	"home": &Location{
-		Header:      "Home",
-		Description: "You can go to kitchen or outside",
-		Locations: []string{
-			"kitchen",
-			"outside",
-		},
-	},
-	"outside": &Location{
-		Header:      "Outside",
-		Description: "Hello world!",
-		Locations: []string{
-			"home",
-			"shop",
-		},
-	},
-	"imaginarium": &Location{
-		Header:      "Some Imaginarium",
-		Description: "Whatever",
-		Actions: []string{
-			"monster",
-		},
-	},
-	"game_boxes": &Location{
+	"game_room": &Location{
 		Header: "Boxes",
 		Description: "Stupid game",
 		Actions: []string{
-			"play",
+			"game_boxes",
 		},
 	},
 }
@@ -89,7 +45,7 @@ func start() {
 	DescTextView = android.GetViewById(
 		"main_layout", "desc_text").(sdk.TextView)
 
-	origin := Locations["game_boxes"]
+	origin := Locations["game_room"]
 	origin.Draw()
 }
 
