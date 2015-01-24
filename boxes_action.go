@@ -23,7 +23,7 @@ var boxesScenario = Scenario{
 }
 
 func (action BoxesAction) Run() {
-	game.ClearViews()
+	//game.ClearViews()
 
 	rand.Seed(time.Now().Unix())
 	win := rand.Intn(2) + 1

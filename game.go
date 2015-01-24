@@ -43,6 +43,7 @@ func (game *Game) RestoreMainLayout() {
 }
 
 func (game *Game) SwitchLayout() {
+	log.Printf("game.go:46 %#v", game.state.LayoutName)
 	android.ChangeLayout(game.state.LayoutName)
 }
 
@@ -52,11 +53,9 @@ func (game *Game) Start() {
 	log.Printf("%#v\n", game)
 	log.Printf("%#v\n", game.state)
 
-	game.headerView = android.GetViewById(
-		"main_layout", "header_text").(sdk.TextView)
+	game.headerView = android.GetViewById("header_text").(sdk.TextView)
 
-	game.descView = android.GetViewById(
-		"main_layout", "desc_text").(sdk.TextView)
+	game.descView = android.GetViewById("desc_text").(sdk.TextView)
 
 	game.SwitchLocation()
 }
