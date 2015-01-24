@@ -203,12 +203,14 @@ func hideLocationButtons() {
 	}
 }
 
-var headerTextView = android.GetViewById(
-		"main_layout", "header_text").(sdk.TextView)
-var	descTextView = android.GetViewById(
-		"main_layout", "desc_text").(sdk.TextView)
+var headerTextView sdk.TextView
+var descTextView sdk.TextView
 
 func start() {
+	headerTextView = android.GetViewById(
+		"main_layout", "header_text").(sdk.TextView)
+	descTextView = android.GetViewById(
+		"main_layout", "desc_text").(sdk.TextView)
 	origin := locations["home"]
 	origin.Draw()
 }
