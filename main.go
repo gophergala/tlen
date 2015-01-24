@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"strconv"
 
 	"github.com/seletskiy/go-android-rpc/android"
 
@@ -13,6 +14,7 @@ import (
 const (
 	viewInvisible = 4
 	viewVisible   = 0
+	viewGone      = 8
 )
 
 type Location struct {
@@ -46,7 +48,7 @@ var locations = map[string]*Location{
 		},
 	},
 	"outside": &Location{
-		Header: "Outside",
+		Header:      "Outside",
 		Description: "Hello world!",
 		Locations: []string{
 			"home",
@@ -63,30 +65,47 @@ func (handler NextButtonHandler) OnClick() {
 	handler.location.Draw()
 }
 
+var locationButtons []sdk.Button
+
 func (location *Location) Draw() {
 	log.Printf("%#v\n", location)
-	buttons := []sdk.Button{
-		android.GetViewById(
-			"main_layout", "choose_button_1").(sdk.Button),
-		android.GetViewById(
-			"main_layout", "choose_button_2").(sdk.Button),
-		android.GetViewById(
-			"main_layout", "choose_button_3").(sdk.Button),
-	}
 
-	for _, button := range buttons {
-		button.SetText1s("")
-		button.SetVisibility(viewInvisible)
-	}
-
-	for index, locationName := range location.Locations {
+	index := 0
+	for _, locationName := range location.Locations {
 		loc := locations[locationName]
-			buttons[index].SetText1s(loc.Header)
-		buttons[index].SetVisibility(viewVisible)
 
-		android.OnClick(buttons[index], NextButtonHandler{
+		var button sdk.Button
+		var isNew bool
+
+		if index >= len(locationButtons) {
+			isNew = true
+			button = android.CreateView(
+				strconv.Itoa(100+index), "android.widget.Button").(sdk.Button)
+		} else {
+			button = locationButtons[index]
+			if !button.IsShown() {
+				button.SetVisibility(viewVisible)
+			}
+		}
+
+		button.SetText1s(loc.Header)
+
+		android.OnClick(button, NextButtonHandler{
 			loc,
 		})
+
+		if isNew {
+			android.AttachView(button, "2130837504")
+			locationButtons = append(locationButtons, button)
+		}
+
+		index++
+	}
+
+	if index < len(locationButtons) {
+		for i, _ := range locationButtons[index:] {
+			locationButtons[index+i].SetVisibility(viewGone)
+		}
 	}
 
 	headerTextView := android.GetViewById(
@@ -99,9 +118,7 @@ func (location *Location) Draw() {
 }
 
 func start() {
-	log.Printf("%#v", locations)
 	origin := locations["home"]
-	log.Printf("%#v", origin)
 	origin.Draw()
 }
 
