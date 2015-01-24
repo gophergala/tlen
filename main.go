@@ -8,6 +8,11 @@ import (
 	"github.com/seletskiy/go-android-rpc/android/sdk"
 )
 
+const (
+	invisible = 4
+	visible   = 0
+)
+
 type Location struct {
 	Name        string
 	Description string
@@ -55,13 +60,13 @@ func (location *Location) Draw() {
 	}
 
 	for _, button := range buttons {
-		button.SetText1s("[disabled]")
-		button.SetEnabled(false)
+		button.SetText1s("")
+		button.SetVisibility(invisible)
 	}
 
 	for index, loc := range location.Locations {
 		buttons[index].SetText1s(loc.Name)
-		buttons[index].SetEnabled(true)
+		buttons[index].SetVisibility(visible)
 
 		android.OnClick(buttons[index], NextButtonHandler{
 			loc,
