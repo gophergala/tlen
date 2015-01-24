@@ -34,12 +34,15 @@ var actions = map[string]*Action{
 	"hideButtons": &Action{
 		Header:      "Hide all location buttons",
 		Description: "for testing",
-		Callback: func() {
-			for index, _ := range locationButtons {
-				if locationButtons[index].IsShown()["result"] == "true" {
-					locationButtons[index].SetVisibility(viewGone)
-				}
-			}
+		Callback: func(action *Action) {
+			HideLocationButtons()
+		},
+	},
+	"customer": &Action{
+		Header:      "Dialog with customer",
+		Description: "",
+		Callback: func(action *Action) {
+			HideLocationButtons()
 		},
 	},
 }
@@ -50,6 +53,9 @@ var locations = map[string]*Location{
 		Description: "Welcome to food shop. I have been shoped! Go to home.",
 		Locations: []string{
 			"outside",
+		},
+		Actions: []string{
+			"customer",
 		},
 	},
 	"kitchen": &Location{
@@ -94,7 +100,12 @@ type ActionButtonHandler struct {
 }
 
 func (handler ActionButtonHandler) OnClick() {
-	handler.action.Callback()
+	headerTextView.SetText1s(handler.action.Header)
+	descTextView.SetText1s(handler.action.Description)
+
+	hideLocationButtons()
+
+	handler.action.Callback(action)
 }
 
 var locationButtons []sdk.Button
@@ -182,14 +193,22 @@ func (location *Location) Draw() {
 		}
 	}
 
-	headerTextView := android.GetViewById(
-		"main_layout", "header_text").(sdk.TextView)
 	headerTextView.SetText1s(location.Header)
-
-	descTextView := android.GetViewById(
-		"main_layout", "desc_text").(sdk.TextView)
 	descTextView.SetText1s(location.Description)
 }
+
+func hideLocationButtons() {
+	for index, _ := range locationButtons {
+		if locationButtons[index].IsShown()["result"] == "true" {
+			locationButtons[index].SetVisibility(viewGone)
+		}
+	}
+}
+
+var headerTextView := android.GetViewById(
+		"main_layout", "header_text").(sdk.TextView)
+var	descTextView := android.GetViewById(
+		"main_layout", "desc_text").(sdk.TextView)
 
 func start() {
 	origin := locations["home"]
