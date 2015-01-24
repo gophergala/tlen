@@ -12,11 +12,11 @@ So we decided to fix this unfortunate coincidence, and start developing
 Go [framework](https://github.com/seletskiy/go-android-rpc), that will bring
 native SDK to the [Go code](main.go).
 
-During Gophergala 48 hour challange, we choose to create small game
+During Gophergala 48 hour challenge, we choose to create small game
 application in Go, that will show potential of developing for Android in Go.
 
 We done [literally ton](https://github.com/seletskiy/go-android-rpc/commit/2487ab8bf4387f4de962eca84f133c2794ad36f9)
-of changes into our little raw'n'tasty framwork along with this game.
+of changes into our little raw'n'tasty framework along with this game.
 
 And now, we proudly present you *tlen*.
 
@@ -27,4 +27,4 @@ spaceship settlers, that are traveling for 45 years to their new home.
 
 App can crash here and there, and we are not so good plot writers.
 
-But we hope you will enjoy.
+But we hope you will enjoy it.
