@@ -27,25 +27,49 @@ type Location struct {
 type Action struct {
 	Header      string
 	Description string
-	Callback    func(action *Action)
+	Callback    func(action *Action, button sdk.Button)
 }
 
 var actions = map[string]*Action{
 	"hideButtons": &Action{
 		Header:      "Hide all location buttons",
 		Description: "for testing",
-		Callback: func(action *Action) {
+		Callback: func(action *Action, button sdk.Button) {
+			hideLocationButtons()
 		},
 	},
 	"customer": &Action{
 		Header:      "Dialog with customer",
 		Description: "",
-		Callback: func(action *Action) {
+		Callback: func(action *Action, button sdk.Button) {
+			hideLocationButtons()
+		},
+	},
+	"playWithCat": &Action{
+		Header:      "Play with cat",
+		Description: "",
+		Callback: func(action *Action, button sdk.Button) {
+			android.OnClick(button, PlayWithCatHandler{button})
 		},
 	},
 }
 
+type PlayWithCatHandler struct {
+	button sdk.Button
+}
+
+func (handler PlayWithCatHandler) OnClick() {
+	handler.button.PerformHapticFeedback(0)
+}
+
 var locations = map[string]*Location{
+	"bunkroom": &Location{
+		Header:      "Bunkroom",
+		Description: "You see cat in front of you.",
+		Actions: []string{
+			"playWithCat",
+		},
+	},
 	"shop": &Location{
 		Header:      "Shop",
 		Description: "Welcome to food shop. I have been shoped! Go to home.",
@@ -95,6 +119,7 @@ func (handler NextButtonHandler) OnClick() {
 
 type ActionButtonHandler struct {
 	action *Action
+	button sdk.Button
 }
 
 func (handler ActionButtonHandler) OnClick() {
@@ -103,7 +128,7 @@ func (handler ActionButtonHandler) OnClick() {
 
 	hideLocationButtons()
 
-	handler.action.Callback(handler.action)
+	handler.action.Callback(handler.action, handler.button)
 }
 
 var locationButtons []sdk.Button
@@ -111,7 +136,6 @@ var actionButtons []sdk.Button
 
 func (location *Location) Draw() {
 	log.Printf("%#v\n", location)
-
 	indexActions := 0
 	for _, actionName := range location.Actions {
 		action := actions[actionName]
@@ -134,11 +158,11 @@ func (location *Location) Draw() {
 		button.SetText1s(action.Header)
 
 		android.OnClick(button, ActionButtonHandler{
-			action,
+			action, button,
 		})
 
 		if isNew {
-			android.AttachView(button, "2130903040")
+			android.AttachView(button, strconv.Itoa(mainLayoutId))
 			actionButtons = append(actionButtons, button)
 		}
 
@@ -178,7 +202,7 @@ func (location *Location) Draw() {
 		})
 
 		if isNew {
-			android.AttachView(button, "2130903040")
+			android.AttachView(button, strconv.Itoa(mainLayoutId))
 			locationButtons = append(locationButtons, button)
 		}
 
@@ -206,11 +230,14 @@ func hideLocationButtons() {
 var headerTextView sdk.TextView
 var descTextView sdk.TextView
 
+var mainLayoutId = 0x7f030000
+
 func start() {
 	headerTextView = android.GetViewById(
 		"main_layout", "header_text").(sdk.TextView)
 	descTextView = android.GetViewById(
 		"main_layout", "desc_text").(sdk.TextView)
+
 	origin := locations["home"]
 	origin.Draw()
 }
