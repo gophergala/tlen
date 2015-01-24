@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/seletskiy/go-android-rpc/android"
 
 	// required for linking
@@ -10,68 +8,84 @@ import (
 	"github.com/seletskiy/go-android-rpc/android/sdk"
 )
 
-type Scene struct {
-	Plot []string
-	Next *Scene
+type Location struct {
+	Name        string
+	Description string
+	Locations   []*Location
 }
 
-var SceneOne = &Scene{
-	Plot: []string{
-		"welcome to tlen",
-		"enjoy the ride",
+var LocationShop = Location{
+	Name:        "Shop",
+	Description: "Welcome to food shop. I have been shoped! Go to home.",
+}
+
+var LocationKitchen = Location{
+	Name:        "Kitchen",
+	Description: "Kitchen. Your kholodilnik is empty",
+	Locations: []*Location{
+		&LocationShop,
 	},
-	Next: SceneTwo,
 }
 
-var SceneTwo = &Scene{
-	Plot: []string{
-		"30 years ago...",
+var LocationOrigin = Location{
+	Name:        "Origin",
+	Description: "You can go to kitchen or outside",
+	Locations: []*Location{
+		&LocationKitchen,
+		&LocationShop,
 	},
 }
 
-func (scene *Scene) Run() {
-	for {
-		text := scene.GetText()
-
-		if text == "" {
-			break
-		}
-
-		fmt.Println(text)
-	}
-
-	if scene.Next != nil {
-		scene.Next.Run()
-	}
+type NextButtonHandler struct {
+	location *Location
 }
 
-func (scene *Scene) GetText() string {
-	if len(scene.Plot) == 0 {
-		return ""
+func (handler NextButtonHandler) OnClick() {
+	handler.location.Draw()
+}
+
+func (location *Location) Draw() {
+	buttons := []sdk.Button{
+		android.GetViewById(
+			"main_layout", "choose_button_1").(sdk.Button),
+		android.GetViewById(
+			"main_layout", "choose_button_2").(sdk.Button),
+		android.GetViewById(
+			"main_layout", "choose_button_3").(sdk.Button),
 	}
-	text := scene.Plot[0]
-	scene.Plot = scene.Plot[1:]
-	return text
-}
 
-type NextTextButtonHandler struct {
-	button   sdk.Button
-	textView sdk.TextView
-}
+	for _, button := range buttons {
+		button.SetText1s("[disabled]")
+		button.SetEnabled(false)
+	}
 
-func (handler NextTextButtonHandler) OnClick() {
-	handler.button.PerformHapticFeedback(0)
-	handler.textView.SetText1s(SceneOne.GetText())
+	for index, loc := range location.Locations {
+		buttons[index].SetText1s(loc.Name)
+		buttons[index].SetEnabled(true)
+
+		android.OnClick(buttons[index], NextButtonHandler{
+			loc,
+		})
+	}
+
+	nameTextView := android.GetViewById(
+		"main_layout", "name_text").(sdk.TextView)
+	nameTextView.SetText1s(location.Name)
+
+	descTextView := android.GetViewById(
+		"main_layout", "desc_text").(sdk.TextView)
+	descTextView.SetText1s(location.Description)
 }
 
 func start() {
-	textView := android.GetViewById("main_layout", "plot_text").(sdk.TextView)
-	nextTextButton := android.GetViewById("main_layout", "next_text").(sdk.Button)
-	android.OnClick(nextTextButton, NextTextButtonHandler{nextTextButton, textView})
+	LocationShop.Locations = []*Location{
+		&LocationOrigin,
+	}
+
+	LocationOrigin.Draw()
 }
 
 func main() {
 	android.OnStart(start)
-
 	android.Enter()
 }
