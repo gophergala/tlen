@@ -65,7 +65,7 @@ var Locations = map[string]*Location{
 		},
 	},
 	"game_boxes": &Location{
-		Header: "Boxes",
+		Header:      "Boxes",
 		Description: "Stupid game",
 		Actions: []string{
 			"play",
@@ -74,11 +74,11 @@ var Locations = map[string]*Location{
 }
 
 var actions = map[string]*Action{
-	"game_boxes": &Action{
+	"monster": &Action{
 		Header:      "Dream",
 		Description: "for testing",
 		Callback: func(action *Action, button sdk.Button) {
-			InitPlayBoxes(action, button)
+			InitDreamWithMonster()
 		},
 	},
 }
@@ -89,7 +89,9 @@ func start() {
 	DescTextView = android.GetViewById(
 		"main_layout", "desc_text").(sdk.TextView)
 
-	origin := Locations["game_boxes"]
+	android.CallControlMusicPlayback("start", android.GetResourceById("raw/file"))
+
+	origin := Locations["imaginarium"]
 	origin.Draw()
 }
 

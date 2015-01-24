@@ -59,6 +59,6 @@ var scenario = SubAction{
 	},
 }
 
-func InitDreamWithMonster(origin *Location, action *Action, button sdk.Button) {
+func InitDreamWithMonster() {
 	scenario.Draw()
 }
