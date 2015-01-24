@@ -33,9 +33,13 @@ func (game *Game) SetLocation(location Location) {
 
 func (game *Game) SetLayoutName(layoutName string) {
 	layoutResponse := android.GetLayoutById(layoutName)
-	log.Printf("%#v\n", layoutResponse)
 	game.state.LayoutId = layoutResponse["layout_id"].(string)
 	game.state.LayoutName = layoutName
+}
+
+func (game *Game) RestoreMainLayout() {
+	game.SetLayoutName("main_layout")
+	game.SwitchLayout()
 }
 
 func (game *Game) SwitchLayout() {
@@ -58,15 +62,21 @@ func (game *Game) Start() {
 }
 
 func (game *Game) ClearViews() {
+	log.Printf("%#v\n", game.viewIds)
 	for _, id := range game.viewIds {
-		view := android.GetViewById("main_layout", id)
+		view := android.GetViewById(game.state.LayoutName, id)
+		log.Printf("%#v\n", view)
 		switch view.(type) {
 		case sdk.TextView:
 			view.(sdk.TextView).SetVisibility(ViewGone)
 		case sdk.Button:
 			view.(sdk.Button).SetVisibility(ViewGone)
+		default:
+			log.Printf("%#v\n", "huevi dela")
+			log.Printf("%#v\n", view)
 		}
 	}
+
 	game.viewIds = make([]string, 0)
 }
 
@@ -141,6 +151,8 @@ func (game *Game) CreateView(viewName string) interface{} {
 
 	id := strconv.Itoa(game.viewId)
 	game.viewIds = append(game.viewIds, id)
+	log.Printf("craeted %#v\n", id)
+	log.Printf("%#v\n", game.viewIds)
 
 	return android.CreateView(id, viewName)
 }
