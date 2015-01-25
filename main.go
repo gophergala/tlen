@@ -23,14 +23,28 @@ func initLocations() map[string]Location {
 	locations["med"] = NewTestLocation("Go to medical", "Medical cabinet")
 	locations["cap"] = NewTestLocation("Go to captain room", "Captain's room")
 
-	locations["stub"] = &StubSubgame{}
-	locations["woman1"] = &Woman1Subgame{}
-	locations["mother1"] = &Mother1Subgame{}
-	locations["captain1"] = &Captain1Subgame{}
-	locations["cook1"] = &Cook1Subgame{}
+	locations["stub"] = &StubSubgame{
+		GlobalLocations: locations,
+	}
+
+	locations["woman1"] = &Woman1Subgame{
+		GlobalLocations: locations,
+	}
+
+	locations["mother1"] = &Mother1Subgame{
+		GlobalLocations: locations,
+	}
+
+	locations["captain1"] = &Captain1Subgame{
+		GlobalLocations: locations,
+	}
+
+	locations["cook1"] = &Cook1Subgame{
+		GlobalLocations: locations,
+	}
 
 	locations["monster"] = &MonsterSubgame{
-		NextLocation: locations["bunk"],
+		GlobalLocations: locations,
 	}
 
 	locations["caress_cat"] = &CaressCatSubgame{
@@ -50,14 +64,14 @@ func initLocations() map[string]Location {
 	locations["bunk"].Link(locations["wakeup_father_subgame"])
 	locations["bunk"].Link(locations["lobby"])
 
-	//locations["lobby"].Link(locations["woman1"])
+	locations["lobby"].Link(locations["woman1"])
 	locations["lobby"].Link(locations["bunk"])
 	locations["lobby"].Link(locations["din"])
 	locations["lobby"].Link(locations["med"])
 	locations["lobby"].Link(locations["cap"])
 
-	//locations["med"].Link(actions["mother1"])
-	//locations["med"].Link(actions["captain1"])
+	locations["med"].Link(locations["mother1"])
+	locations["med"].Link(locations["captain1"])
 	locations["med"].Link(locations["lobby"])
 
 	//locations["din"].Link(actions["cook1"])

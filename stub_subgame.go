@@ -4,6 +4,7 @@ import "github.com/seletskiy/go-android-rpc/android"
 
 type StubSubgame struct {
 	Subgame
+	GlobalLocations map[string]Location
 }
 
 func (subgame StubSubgame) GetButtonTitle() string {
@@ -81,7 +82,7 @@ func (subgame StubSubgame) Enter(state *State) {
 
 	locations["5"].Link(locations["6"])
 
-	locations["6"].Link(globalLocations["bunk"])
+	locations["6"].Link(subgame.GlobalLocations["bunk"])
 
 	subgame.SetLayoutName("main_layout")
 	subgame.SetLocation(locations["1"])

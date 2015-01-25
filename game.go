@@ -77,6 +77,7 @@ func (game *Game) ClearViews() {
 }
 
 func (game *Game) SwitchLocation() {
+	log.Printf("game.go:80 %#v", game)
 	game.ClearViews()
 
 	location := game.state.Location
