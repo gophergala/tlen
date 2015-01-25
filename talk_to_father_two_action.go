@@ -1,24 +1,24 @@
 package main
 
-type PlayWithCatOneAction struct{}
+type TalkToFatherTwoAction struct{}
 
-func (action PlayWithCatOneAction) GetButtonTitle() string {
-	return "Play with cat"
+func (action TalkToFatherTwoAction) GetButtonTitle() string {
+	return "Talk to father"
 }
 
-func (action PlayWithCatOneAction) GetLayoutName() string {
+func (action TalkToFatherTwoAction) GetLayoutName() string {
 	return "main_layout"
 }
 
-func (action PlayWithCatOneAction) Run() {
+func (action TalkToFatherTwoAction) Run() {
 	topTitle := "Todo"
 	topDescription := `Todo`
 
 	text := map[int]ScreenText{
 		0: ScreenText{
 			Button: map[int]string{
-				0: `Play`,
-				1: `Put away`,
+				0: `Talk`,
+				1: `Stop talking`,
 			},
 		},
 	}
@@ -29,14 +29,6 @@ func (action PlayWithCatOneAction) Run() {
 			Description: text[0].Description,
 			PreDraw: func(scenario *Scenario) bool {
 				// haptic
-				game.state.GameProgress += 1
-
-				// should work, see main.go
-				//if game.state.GameProgress == 3 {
-				game.SetLocation(locations["transition_bunk1"])
-				game.SwitchLocation()
-				//}
-
 				return false
 			},
 		},
@@ -44,18 +36,19 @@ func (action PlayWithCatOneAction) Run() {
 			Title:       text[0].Button[1],
 			Description: text[0].Description,
 			PreDraw: func(scenario *Scenario) bool {
-				game.SetLocation(locations["bunk1"])
+				locations["med1"].UnlinkAction(action)
+				game.SetLocation(locations["med1"])
 				game.SwitchLocation()
 				return false
 			},
 		},
 	}
 
-	catScenario := &Scenario{
+	scenario := &Scenario{
 		Title:       topTitle,
 		Description: topDescription,
 		Answers:     answersOne,
 	}
 
-	catScenario.Draw()
+	scenario.Draw()
 }

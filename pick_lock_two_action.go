@@ -1,16 +1,16 @@
 package main
 
-type PlayWithCatOneAction struct{}
+type PickLockTwoAction struct{}
 
-func (action PlayWithCatOneAction) GetButtonTitle() string {
-	return "Play with cat"
+func (action PickLockTwoAction) GetButtonTitle() string {
+	return "Pick lock"
 }
 
-func (action PlayWithCatOneAction) GetLayoutName() string {
+func (action PickLockTwoAction) GetLayoutName() string {
 	return "main_layout"
 }
 
-func (action PlayWithCatOneAction) Run() {
+func (action PickLockTwoAction) Run() {
 	topTitle := "Todo"
 	topDescription := `Todo`
 
@@ -33,7 +33,7 @@ func (action PlayWithCatOneAction) Run() {
 
 				// should work, see main.go
 				//if game.state.GameProgress == 3 {
-				game.SetLocation(locations["transition_bunk1"])
+				game.SetLocation(locations["lobby2"])
 				game.SwitchLocation()
 				//}
 

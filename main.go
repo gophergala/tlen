@@ -21,13 +21,21 @@ var locations = map[string]Location{
 	"bunk2":            NewTestLocation("Go to bunk2", "just another bunkroom"),
 
 	"lobby1": NewTestLocation("Go to lobby", "just another bunkroom"),
-	"din1":   NewTestLocation("Go to dinary room", "just another bunkroom"),
-	"med1":   NewTestLocation("Go to medical room", "just another bunkroom"),
-	"cap1":   NewTestLocation("Go to captain room", "just another bunkroom"),
+	"lobby2": NewTestLocation("Go to lobby2", "just another bunkroom"),
+
+	"din1": NewTestLocation("Go to dinary room", "just another bunkroom"),
+	"din2": NewTestLocation("Go to dinary room2", "just another bunkroom"),
+
+	"med1": NewTestLocation("Go to medical room", "just another bunkroom"),
+	"med2": NewTestLocation("Go to medical room2", "just another bunkroom"),
+
+	"cap1": NewTestLocation("Go to captain room", "just another bunkroom"),
+	"cap2": NewTestLocation("Go to captain room2", "just another bunkroom"),
 }
 
 var actions = map[string]Action{
 	// game actions
+	// stage 1
 	"monster_facing":           MonsterFacingAction{},
 	"talk_to_father1":          TalkToFatherOneAction{},
 	"play_with_cat1":           PlayWithCatOneAction{},
@@ -36,13 +44,19 @@ var actions = map[string]Action{
 	"talk_to_captain1":         TalkToCaptainOneAction{},
 	"talk_to_cook1":            TalkToCookOneAction{},
 	"approve_transition_bunk1": ApproveTransitionBunkOneAction{},
+
+	// stage 2
+	"talk_to_father2": TalkToFatherTwoAction{},
+	"talk_to_woman2":  TalkToWomanTwoAction{},
+	"pick_lock_2":     PickLockTwoAction{},
+	"talk_to_mother2": TalkToMotherTwoAction{},
+	"talk_to_cook2":   TalkToCookTwoAction{},
+
+	// stage 3
+
 }
 
 func init() {
-	initStageOne()
-}
-
-func initStageOne() {
 	// implemented, linked to bunk1
 	//locations["dream"].LinkAction(actions["monster_facing"])
 
@@ -66,35 +80,34 @@ func initStageOne() {
 	locations["din1"].LinkLocation(locations["lobby1"])
 
 	locations["cap1"].LinkLocation(locations["lobby1"])
-
-	// stage 2
-	locations["bunk2"].LinkLocation(locations["bunk1"]) // should be lobby2
 }
 
 func initStageTwo() {
-	//    locations["bunk2"].LinkAction(actions["talk_to_father2"])
+	// stage 2
+	locations["bunk2"].LinkLocation(locations["lobby2"]) // should be lobby2
+	locations["bunk2"].LinkAction(actions["talk_to_father2"])
 
-	//    locations["lobby2"].LinkAction(actions["talk_to_woman2"])
-	//    locations["lobby2"].LinkLocation(locations["bunk2"])
-	//    locations["lobby2"].LinkLocation(locations["din2"])
-	//    locations["lobby2"].LinkLocation(locations["med2"])
-	//    locations["lobby2"].LinkLocation(locations["cap2"])
+	locations["lobby2"].LinkAction(actions["talk_to_woman2"])
+	locations["lobby2"].LinkLocation(locations["bunk2"])
+	locations["lobby2"].LinkLocation(locations["din2"])
+	locations["lobby2"].LinkLocation(locations["med2"])
+	locations["lobby2"].LinkLocation(locations["cap2"])
 
-	//    locations["med2"].LinkLocation(locations["lobby2"])
-	//    locations["med2"].LinkAction(actions["pick_lock_2"])
+	locations["med2"].LinkLocation(locations["lobby2"])
+	locations["med2"].LinkAction(actions["pick_lock_2"])
 
-	//    locations["din2"].LinkAction(actions["talk_to_mother2"])
-	//    locations["din2"].LinkAction(actions["talk_to_cook2"])
-	//    locations["din2"].LinkLocation(locations["lobby2"])
+	locations["din2"].LinkAction(actions["talk_to_mother2"])
+	locations["din2"].LinkAction(actions["talk_to_cook2"])
+	locations["din2"].LinkLocation(locations["lobby2"])
 
-	//    locations["cap2"].LinkLocation(locations["lobby2"])
+	locations["cap2"].LinkLocation(locations["lobby2"])
 }
 
 func initStageThree() {
-	//    if !game.CaptainIsAbused() {
-	//        // captain killed father
-	//        locations["bunk3"].LinkAction(actions["talk_to_father3"])
-	//    }
+	if !game.IsCaptainAbused() {
+		// captain killed father
+		locations["bunk3"].LinkAction(actions["talk_to_father3"])
+	}
 
 	//    locations["bunk3"].LinkLocation(locations["lobby3"])
 

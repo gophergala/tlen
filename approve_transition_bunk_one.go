@@ -11,6 +11,7 @@ func (action ApproveTransitionBunkOneAction) GetLayoutName() string {
 }
 
 func (action ApproveTransitionBunkOneAction) Run() {
+	initStageTwo()
 	game.SetLocation(locations["bunk2"])
 	game.SwitchLocation()
 }

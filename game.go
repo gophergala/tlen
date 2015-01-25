@@ -30,6 +30,10 @@ type Game struct {
 	ActionOnClickHandler   GameActionOnClickHandler
 }
 
+func (game Game) IsCaptainAbused() bool {
+	return false
+}
+
 func (game *Game) IncrementMoveCounter() {
 	game.state.MoveCounter += 1
 	log.Printf("!!! current game MOVE is  %#v\n", game.state.MoveCounter)
