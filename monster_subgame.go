@@ -4,6 +4,8 @@ import "github.com/seletskiy/go-android-rpc/android"
 
 type MonsterSubgame struct {
 	Subgame
+
+	NextLocation Location
 }
 
 func (subgame MonsterSubgame) GetButtonTitle() string {
@@ -144,7 +146,7 @@ func (subgame MonsterSubgame) Enter(state *State) {
 
 	locations["11"].Link(locations["12"])
 
-	locations["12"].Link(globalLocations["kitchen"])
+	locations["12"].Link(subgame.NextLocation)
 
 	subgame.SetLayoutName("main_layout")
 	subgame.SetLocation(locations["1"])

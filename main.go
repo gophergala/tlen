@@ -15,67 +15,84 @@ const (
 
 const Cat = `<font color="green">春</font>`
 
-var globalLocations = map[string]Location{
-	"bunk":  NewTestLocation("Go to bunk", "Your place"),
-	"lobby": NewTestLocation("Go to lobby", "You enter the lobby"),
-	"din":   NewTestLocation("Go to dinnary", "Dinnay"),
-	"med":   NewTestLocation("Go to medical", "Medical cabinet"),
-	"cap":   NewTestLocation("Go to captain room", "Captain's room"),
+func initLocations() map[string]Location {
+	locations := make(map[string]Location)
+	locations["bunk"] = NewTestLocation("Go to bunk", "Your place")
+	locations["lobby"] = NewTestLocation("Go to lobby", "You enter the lobby")
+	locations["din"] = NewTestLocation("Go to dinnary", "Dinnay")
+	locations["med"] = NewTestLocation("Go to medical", "Medical cabinet")
+	locations["cap"] = NewTestLocation("Go to captain room", "Captain's room")
 
-	"caress_cat":            &CaressCatSubgame{},
-	"wakeup_father_subgame": &WakeUpFatherSubgame{},
-	"stub":                  &StubSubgame{},
-	"woman1":                &Woman1Subgame{},
-	"mother1":               &Mother1Subgame{},
-	"captain1":              &Captain1Subgame{},
-	"cook1":                 &Cook1Subgame{},
-}
+	locations["stub"] = &StubSubgame{}
+	locations["woman1"] = &Woman1Subgame{}
+	locations["mother1"] = &Mother1Subgame{}
+	locations["captain1"] = &Captain1Subgame{}
+	locations["cook1"] = &Cook1Subgame{}
 
-func init() {
-	globalLocations["bunk"].Link(globalLocations["caress_cat"])
-	globalLocations["bunk"].Link(globalLocations["wakeup_father_subgame"])
-	globalLocations["bunk"].Link(globalLocations["lobby"])
-	globalLocations["bunk"].Link(globalLocations["stub"])
+	locations["monster"] = &MonsterSubgame{
+		NextLocation: locations["bunk"],
+	}
 
-	globalLocations["lobby"].Link(globalLocations["woman1"])
-	globalLocations["lobby"].Link(globalLocations["bunk"])
-	globalLocations["lobby"].Link(globalLocations["din"])
-	globalLocations["lobby"].Link(globalLocations["med"])
-	globalLocations["lobby"].Link(globalLocations["cap"])
+	locations["caress_cat"] = &CaressCatSubgame{
+		OriginLocation: locations["bunk"],
+	}
 
-	globalLocations["med"].Link(globalLocations["mother1"])
-	globalLocations["med"].Link(globalLocations["captain1"])
-	globalLocations["med"].Link(globalLocations["lobby"])
+	locations["wakeup_father_subgame"] = &WakeUpFatherSubgame{
+		NextLocation: &JumpLocation{
+			Jump: locations["bunk"],
+			BaseLocation: BaseLocation{
+				ButtonTitle: "Wake up",
+			},
+		},
+	}
 
-	globalLocations["din"].Link(globalLocations["cook1"])
-	globalLocations["din"].Link(globalLocations["lobby"])
+	locations["bunk"].Link(locations["caress_cat"])
+	locations["bunk"].Link(locations["wakeup_father_subgame"])
+	locations["bunk"].Link(locations["lobby"])
 
-	globalLocations["cap"].Link(globalLocations["lobby"])
+	//locations["lobby"].Link(locations["woman1"])
+	locations["lobby"].Link(locations["bunk"])
+	locations["lobby"].Link(locations["din"])
+	locations["lobby"].Link(locations["med"])
+	locations["lobby"].Link(locations["cap"])
 
-	//locations["bunk"].Link(globalLocations["father2"])
+	//locations["med"].Link(actions["mother1"])
+	//locations["med"].Link(actions["captain1"])
+	locations["med"].Link(locations["lobby"])
 
-	//locations["lobby"].Link(globalLocations["woman2"])
+	//locations["din"].Link(actions["cook1"])
+	locations["din"].Link(locations["lobby"])
 
-	//locations["med"].Link(globalLocations["pick_lock"])
+	locations["cap"].Link(locations["lobby"])
 
-	//locations["din"].Link(globalLocations["mother2"])
-	//locations["din"].Link(globalLocations["cook2"])
+	//locations["bunk"].Link(locations["father2"])
+
+	//locations["lobby"].Link(locations["woman2"])
+
+	//locations["med"].Link(locations["pick_lock"])
+
+	//locations["din"].Link(locations["mother2"])
+	//locations["din"].Link(locations["cook2"])
 	//if !game.IsCaptainAbused()
-	//locations["bunk"].Link(globalLocations["father3"])
+	//locations["bunk"].Link(locations["father3"])
 	//}
 
 	//if game.ScalpelIsStolen {
-	//locations["lobby"].Link(globalLocations["woman3"])
+	//locations["lobby"].Link(locations["woman3"])
 	//}
 
-	//locations["med"].Link(globalLocations["mother3"])
-	//locations["din"].Link(globalLocations["cook3"])
-	//locations["cap"].Link(globalLocations["explore_captain_room"])
+	//locations["med"].Link(locations["mother3"])
+	//locations["din"].Link(locations["cook3"])
+	//locations["cap"].Link(locations["explore_captain_room"])
+
+	return locations
 }
 
 func start() {
+	locations := initLocations()
+
 	game := NewGame(&State{})
-	game.SetLocation(globalLocations["bunk"])
+	game.SetLocation(locations["monster"])
 	game.SetLayoutName("main_layout")
 	game.Start()
 }

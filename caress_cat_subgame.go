@@ -7,6 +7,8 @@ import (
 
 type CaressCatSubgame struct {
 	Subgame
+
+	OriginLocation Location
 }
 
 func (subgame CaressCatSubgame) GetButtonTitle() string {
@@ -23,12 +25,9 @@ func (subgame CaressCatSubgame) Enter(state *State) {
 	defer android.PanicHandler()
 
 	main := &CaressCatLocation{game: &subgame}
+	main.Link(subgame.OriginLocation)
 
-	main.Link(globalLocations["home"])
-
-	subgame.Link(globalLocations["home"])
 	subgame.SetLocation(main)
-
 	subgame.Start()
 }
 

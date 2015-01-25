@@ -13,6 +13,8 @@ type WakeUpFatherSubgame struct {
 	Subgame
 	descView     sdk.TextView
 	talkLocation Location
+
+	NextLocation Location
 }
 
 func (subgame WakeUpFatherSubgame) GetButtonTitle() string {
@@ -147,7 +149,7 @@ type FinalWakeUpLocation struct {
 
 func (location FinalWakeUpLocation) Enter(state *State) {
 	log.Printf("%#v", "final wake up locatin")
-	location.game.SetLocation(globalLocations["bunk"])
+	location.game.SetLocation(location.game.NextLocation)
 }
 
 func (location *AwaitWakeUpLocation) OnChange(values []float64) {

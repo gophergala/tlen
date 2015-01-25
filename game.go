@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"strconv"
 
 	"github.com/seletskiy/go-android-rpc/android"
@@ -87,6 +88,7 @@ func (game *Game) SwitchLocation() {
 
 	linkedLocations := location.GetLinkedLocations()
 	for _, linkedLocation := range linkedLocations {
+		log.Printf("game.go:90 %#v", linkedLocation)
 		button := game.CreateView("android.widget.Button").(sdk.Button)
 		android.SetTextFromHtml(button, linkedLocation.GetButtonTitle())
 
