@@ -13,12 +13,15 @@ const (
 	ViewGone      = 8
 )
 
+const Cat = `<font color="green">春</font>`
+
 var globalLocations = map[string]Location{
-	"home":    NewTestLocation("home", "home desc"),
-	"kitchen": NewTestLocation("kitchen", "kitchen desc"),
-	"outside": NewTestLocation("outside", "outside desc"),
-	"shop":    NewTestLocation("shop", "shop desc"),
-	"monster": &MonsterSubgame{},
+	"home":     NewTestLocation("home", "home desc"),
+	"kitchen":  NewTestLocation("kitchen", "kitchen desc"),
+	"outside":  NewTestLocation("outside", "outside desc"),
+	"shop":     NewTestLocation("shop", "shop desc"),
+	"monster":  &MonsterSubgame{},
+	"cat_bunk": &CaressCatSubgame{},
 }
 
 func init() {
@@ -34,6 +37,7 @@ func init() {
 	globalLocations["shop"].Link(globalLocations["outside"])
 
 	globalLocations["home"].Link(globalLocations["monster"])
+	globalLocations["home"].Link(globalLocations["cat_bunk"])
 }
 
 func start() {

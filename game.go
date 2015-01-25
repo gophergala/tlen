@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"strconv"
 
 	"github.com/seletskiy/go-android-rpc/android"
@@ -9,6 +8,9 @@ import (
 )
 
 type State struct {
+	Cat      int
+	Progress int
+
 	ViewId      int
 	Location    Location
 	LayoutId    string
@@ -43,8 +45,6 @@ func (game *Game) SetLocation(location Location) {
 
 func (game *Game) SetLayoutName(layoutName string) {
 	layoutResponse := android.GetLayoutById(layoutName)
-	log.Printf("game.go:44 %#v", layoutResponse)
-	log.Printf("game.go:46 %#v", game.state)
 	game.state.LayoutId = layoutResponse["layout_id"].(string)
 	game.state.LayoutName = layoutName
 }
@@ -67,10 +67,8 @@ func (game *Game) Start() {
 }
 
 func (game *Game) ClearViews() {
-	log.Printf("game.go:70 %#v", game.viewObjects)
 
 	for _, view := range game.viewObjects[game.state.LayoutName] {
-		log.Printf("game.go:71 %#v", view)
 		android.RemoveView(view, game.state.LayoutId)
 	}
 
@@ -82,16 +80,14 @@ func (game *Game) SwitchLocation() {
 
 	location := game.state.Location
 
-	game.headerView.SetText1s(location.GetHeader())
+	android.SetTextFromHtml(game.headerView, location.GetHeader())
 	android.SetTextFromHtml(game.descView, location.GetDescription())
 
 	game.SetLocationArterfactsVisibility(true)
 
 	linkedLocations := location.GetLinkedLocations()
 	for _, linkedLocation := range linkedLocations {
-		log.Printf("game.go:90 %#v", linkedLocation)
 		button := game.CreateView("android.widget.Button").(sdk.Button)
-		//button.SetText1s(linkedLocation.GetButtonTitle())
 		android.SetTextFromHtml(button, linkedLocation.GetButtonTitle())
 
 		android.OnClick(button,
@@ -103,9 +99,7 @@ func (game *Game) SwitchLocation() {
 		game.AttachView(button.View)
 	}
 
-	log.Printf("game.go:103 %#v", game.viewObjects)
 	location.Enter(game.state)
-	log.Printf("game.go:105 %#v", game.viewObjects)
 }
 
 func (game *Game) SetLocationArterfactsVisibility(should bool) {
