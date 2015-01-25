@@ -21,7 +21,8 @@ var locations = map[string]Location{
 }
 
 var actions = map[string]Action{
-	"boxes": &BoxesAction{},
+	"boxes":   &BoxesAction{},
+	"monster": &MonsterAction{},
 }
 
 func init() {
@@ -38,6 +39,7 @@ func init() {
 
 	// DANGEROUS
 	locations["kitchen"].LinkAction(actions["boxes"])
+	locations["kitchen"].LinkAction(actions["monster"])
 }
 
 var game *Game
