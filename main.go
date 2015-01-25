@@ -25,6 +25,10 @@ var globalLocations = map[string]Location{
 	"caress_cat":            &CaressCatSubgame{},
 	"wakeup_father_subgame": &WakeUpFatherSubgame{},
 	"stub":                  &StubSubgame{},
+	"woman1":                &Woman1Subgame{},
+	"mother1":               &Mother1Subgame{},
+	"captain1":              &Captain1Subgame{},
+	"cook1":                 &Cook1Subgame{},
 }
 
 func init() {
@@ -33,40 +37,40 @@ func init() {
 	globalLocations["bunk"].Link(globalLocations["lobby"])
 	globalLocations["bunk"].Link(globalLocations["stub"])
 
-	//globalLocations["lobby"].Link(globalLocations["woman1"])
+	globalLocations["lobby"].Link(globalLocations["woman1"])
 	globalLocations["lobby"].Link(globalLocations["bunk"])
 	globalLocations["lobby"].Link(globalLocations["din"])
 	globalLocations["lobby"].Link(globalLocations["med"])
 	globalLocations["lobby"].Link(globalLocations["cap"])
 
-	//globalLocations["med"].Link(actions["mother1"])
-	//globalLocations["med"].Link(actions["captain1"])
+	globalLocations["med"].Link(globalLocations["mother1"])
+	globalLocations["med"].Link(globalLocations["captain1"])
 	globalLocations["med"].Link(globalLocations["lobby"])
 
-	//globalLocations["din"].Link(actions["cook1"])
+	globalLocations["din"].Link(globalLocations["cook1"])
 	globalLocations["din"].Link(globalLocations["lobby"])
 
 	globalLocations["cap"].Link(globalLocations["lobby"])
 
-	//locations["bunk"].Link(actions["father2"])
+	//locations["bunk"].Link(globalLocations["father2"])
 
-	//locations["lobby"].Link(actions["woman2"])
+	//locations["lobby"].Link(globalLocations["woman2"])
 
-	//locations["med"].Link(actions["pick_lock"])
+	//locations["med"].Link(globalLocations["pick_lock"])
 
-	//locations["din"].Link(actions["mother2"])
-	//locations["din"].Link(actions["cook2"])
+	//locations["din"].Link(globalLocations["mother2"])
+	//locations["din"].Link(globalLocations["cook2"])
 	//if !game.IsCaptainAbused()
-	//locations["bunk"].Link(actions["father3"])
+	//locations["bunk"].Link(globalLocations["father3"])
 	//}
 
 	//if game.ScalpelIsStolen {
-	//locations["lobby"].Link(actions["woman3"])
+	//locations["lobby"].Link(globalLocations["woman3"])
 	//}
 
-	//locations["med"].Link(actions["mother3"])
-	//locations["din"].Link(actions["cook3"])
-	//locations["cap"].Link(actions["explore_captain_room"])
+	//locations["med"].Link(globalLocations["mother3"])
+	//locations["din"].Link(globalLocations["cook3"])
+	//locations["cap"].Link(globalLocations["explore_captain_room"])
 }
 
 func start() {
