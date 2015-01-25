@@ -9,7 +9,7 @@ import (
 	"github.com/zazab/zhash"
 )
 
-type TalkToFatherAction struct {
+type TalkToFatherOneAction struct {
 	minX          float64
 	minY          float64
 	minZ          float64
@@ -21,11 +21,11 @@ type TalkToFatherAction struct {
 	wakeUpSuccess bool
 }
 
-func (action TalkToFatherAction) GetButtonTitle() string {
+func (action TalkToFatherOneAction) GetButtonTitle() string {
 	return "Talk to father"
 }
 
-func (action TalkToFatherAction) GetLayoutName() string {
+func (action TalkToFatherOneAction) GetLayoutName() string {
 	return "main_layout"
 }
 
@@ -34,7 +34,7 @@ type ScreenText struct {
 	Button      map[int]string
 }
 
-func (action TalkToFatherAction) Run() {
+func (action TalkToFatherOneAction) Run() {
 	desc := game.CreateView("android.widget.TextView").(sdk.TextView)
 	desc.SetText1s("YOU MUST MOVE YOUR PHONE FOR SAFE YOUR FATHER")
 	desc.SetTextSize(50.0)
@@ -55,7 +55,7 @@ func (action TalkToFatherAction) Run() {
 	)
 }
 
-func (action TalkToFatherAction) Talk() {
+func (action TalkToFatherOneAction) Talk() {
 	topTitle := "Family bunk"
 
 	topDescription := `You're in your family bunk. You see 春. The door to Imaginarium is closed.`
@@ -172,7 +172,7 @@ Presenter continues to talk about all the possibilities that awaits you and 3'00
 }
 
 type TalkToFatherAccelerometerHandler struct {
-	action *TalkToFatherAction
+	action *TalkToFatherOneAction
 }
 
 func (handler TalkToFatherAccelerometerHandler) OnChange(values []float64) {
@@ -184,7 +184,7 @@ func (handler TalkToFatherAccelerometerHandler) OnAccuracyChange() {
 	log.Printf("%#v\n", "accuracy change!!")
 }
 
-func (action *TalkToFatherAction) OnChangeAccelerometerData(values []float64) {
+func (action *TalkToFatherOneAction) OnChangeAccelerometerData(values []float64) {
 	if action.wakeUpSuccess {
 		return
 	}

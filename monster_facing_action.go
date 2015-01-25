@@ -1,18 +1,18 @@
 package main
 
-type MonsterAction struct{}
+type MonsterFacingAction struct{}
 
-func (action MonsterAction) GetButtonTitle() string {
-	return "Monster Title"
+func (action MonsterFacingAction) GetButtonTitle() string {
+	return "Monster"
 }
 
-func (action MonsterAction) GetLayoutName() string {
+func (action MonsterFacingAction) GetLayoutName() string {
 	return "main_layout"
 }
 
 var rootScenario = Scenario{}
 
-func (action MonsterAction) Run() {
+func (action MonsterFacingAction) Run() {
 
 	answerEleven := Scenarios{
 		&Scenario{
@@ -21,7 +21,8 @@ func (action MonsterAction) Run() {
 			PreDraw: func(scenario *Scenario) bool {
 				scenario.Description = "Father takes your away from Imaginarium and locks the door on <b>magnet lock</b>."
 				game.SetCurrentStage(1)
-				scenario.Draw()
+				game.SetLocation(locations["bunk1"])
+				game.SwitchLocation()
 				return false
 			},
 		},
