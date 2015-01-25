@@ -17,7 +17,14 @@ const Cat = `<font color="green">春</font>`
 
 func initLocations() map[string]Location {
 	locations := make(map[string]Location)
-	locations["bunk"] = NewTestLocation("Go to bunk", "Your place")
+	locations["bunk"] = NewTestLocation(
+		"Go to bunk",
+		"<p>It's yours family bunk.</p>"+
+			"<p>You see "+Cat+".</p>"+
+			"<p>You see your dad watching TV.</p>"+
+			"<p>There are door to ship lobby.</p>",
+	)
+
 	locations["lobby"] = NewTestLocation("Go to lobby", "You enter the lobby")
 	locations["din"] = NewTestLocation("Go to dinnary", "Dinnay")
 	locations["med"] = NewTestLocation("Go to medical", "Medical cabinet")

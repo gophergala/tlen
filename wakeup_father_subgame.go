@@ -29,29 +29,25 @@ func (subgame WakeUpFatherSubgame) Enter(state *State) {
 	defer android.PanicHandler()
 	subgame.Subgame.Enter(state)
 
-	mainTitle := "Family bunk"
-	mainDesc := `You're in your family bunk. You see 春. The door ` +
-		`to Imaginarium is closed.`
-
 	ignoreDescription := `
-Dad is watching TV.
+<p>Dad is watching TV.</p>
 
-"Go see your mother. She needs to check you after hibernation."
+<p>"Go see your mother. She needs to check you after hibernation."</p>
 
-Presenter continues to talk about all the possibilities that awaits you and 3'000 settlers on new planet.`
+<p>Presenter continues to talk about all the possibilities that awaits you and 3'000 settlers on new planet.</p>`
 
 	locations := map[string]Location{
 		"1": &BaseLocation{
-			ButtonTitle: mainTitle,
-			Description: mainDesc,
+			Description: `<p>Dad wakes up. He look at you with empty eyes.</p>`,
 		},
 
 		"2": &BaseLocation{
 			ButtonTitle: `"Hey, dad! The monster was sooo scary!"`,
-			Description: `"Huh?"
+			Description: `<p>"Huh?"</p>
 
-Dad turns on TV. You hear how presenter of the TV program tells you about ` +
-				`new planet, detected at the edge of the ship's radars range.`,
+<p>Dad turns on TV.</p>
+<p>You hear how presenter of the TV program tells you about ` +
+				`new planet, detected at the edge of the ship's radars range.</p>`,
 		},
 		"3.1": &BaseLocation{
 			ButtonTitle: `"It tried to hurt me! But I was brave."`,
@@ -65,10 +61,10 @@ Dad turns on TV. You hear how presenter of the TV program tells you about ` +
 			ButtonTitle: `Ignore TV and dad`,
 		},
 		"5.1": &BaseLocation{
-			ButtonTitle: `Caress 春`,
+			ButtonTitle: `Caress ` + Cat,
 		},
 		"5.2": &BaseLocation{
-			ButtonTitle: `Disregard 春`,
+			ButtonTitle: `Disregard ` + Cat,
 		},
 		"6": &FinalWakeUpLocation{
 			BaseLocation{ButtonTitle: `Go outside`},
@@ -123,7 +119,7 @@ type AwaitWakeUpLocation struct {
 func (location AwaitWakeUpLocation) Enter(state *State) {
 	log.Printf("%#v", "await wakeuasdasd")
 	desc := location.game.CreateView("android.widget.TextView").(sdk.TextView)
-	desc.SetText1s("YOU MUST MOVE YOUR PHONE FOR SAFE YOUR FATHER")
+	desc.SetText1s("YOU NEED SHAKE YOUR FATHER TO WAKE HIM UP")
 	desc.SetTextSize(50.0)
 	location.game.descView = desc
 	location.game.AttachView(desc.View)
@@ -194,9 +190,11 @@ func (location *AwaitWakeUpLocation) OnChange(values []float64) {
 		location.maxZ = z
 	}
 
+	log.Printf("wakeup_father_subgame.go:197 %#v", location)
+
 	if math.Abs(location.maxX)+math.Abs(location.minX) > 20 ||
 		math.Abs(location.maxY)+math.Abs(location.minY) > 20 ||
-		math.Abs(location.maxZ)+math.Abs(location.maxZ) > 20 {
+		math.Abs(location.maxZ)+math.Abs(location.minZ) > 20 {
 		//log.Printf("%#v\n", "YOU WIN")
 		location.wakeUpSuccess = true
 		location.game.Talk()
