@@ -10,8 +10,8 @@ import (
 
 type HagridAction struct {
 	Relations map[int][]int
-	Buttons map[int]sdk.ToggleButton
-	State map[int]bool
+	Buttons   map[int]sdk.ToggleButton
+	State     map[int]bool
 }
 
 func (action HagridAction) GetLayoutName() string {
@@ -32,9 +32,9 @@ func (action HagridAction) Run() {
 	action.State = make(map[int]bool)
 
 	action.State = map[int]bool{
-		1: false, 2:false, 3:false,
-		4: false, 5:false, 6:false,
-		7:false, 8:false, 9:false,
+		1: false, 2: false, 3: false,
+		4: false, 5: false, 6: false,
+		7: false, 8: false, 9: false,
 	}
 
 	log.Printf("%#v", action)
@@ -97,11 +97,10 @@ func (action HagridAction) HangridOnClick(index int) {
 }
 
 type HagridOnClickHandler struct {
-	index int
+	index  int
 	action *HagridAction
 }
 
 func (handler HagridOnClickHandler) OnClick() {
 	handler.action.HangridOnClick(handler.index)
 }
-
