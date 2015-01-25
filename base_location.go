@@ -1,5 +1,7 @@
 package main
 
+import "errors"
+
 type Location interface {
 	GetButtonTitle() string
 	GetHeader() string
@@ -18,6 +20,10 @@ type BaseLocation struct {
 }
 
 func (location *BaseLocation) Link(nextLocation Location) {
+	if nextLocation == nil {
+		panic(errors.New("NEXTLOCATION = NIL"))
+	}
+
 	location.LinkedLocations = append(location.LinkedLocations, nextLocation)
 }
 
