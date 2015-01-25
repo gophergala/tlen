@@ -13,7 +13,7 @@ fi
 mkdir -p libs/armeabi-v7a src/go/android
 ANDROID_APP=$PWD
 
-rm gen bin -r
+rm -rf gen bin
 
 ln -sf $GOPATH/src/golang.org/x/mobile/app/*.java $ANDROID_APP/src/go
 ln -sf $GOPATH/src/golang.org/x/mobile/bind/java/Seq.java $ANDROID_APP/src/go
