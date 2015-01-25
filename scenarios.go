@@ -33,7 +33,8 @@ func (scenarios *Scenarios) Draw() {
 		}
 
 		button := game.CreateView("android.widget.Button").(sdk.Button)
-		button.SetText1s(scenario.Title)
+		//button.SetText1s(scenario.Title)
+		android.SetTextFromHtml(button, scenario.Title)
 		android.OnClick(button, ScenarioButtonHandler{
 			scenario,
 			&button,
@@ -47,7 +48,8 @@ func (scenario *Scenario) Draw() {
 	game.ClearViews()
 
 	desc := game.CreateView("android.widget.TextView").(sdk.TextView)
-	desc.SetText1s(scenario.Description)
+	//desc.SetText1s(scenario.Description)
+	android.SetTextFromHtml(desc, scenario.Description)
 	game.AttachView(desc.View)
 
 	scenario.Answers.Draw()

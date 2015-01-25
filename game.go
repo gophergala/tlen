@@ -73,7 +73,8 @@ func (game *Game) SwitchLocation() {
 	location := game.state.Location
 
 	game.headerView.SetText1s(location.GetHeader())
-	game.descView.SetText1s(location.GetDescription())
+	//game.descView.SetText1s(location.GetDescription())
+	android.SetTextFromHtml(game.descView, location.GetDescription())
 
 	game.SetLocationArterfactsVisibility(true)
 
