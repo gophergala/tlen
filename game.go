@@ -188,3 +188,4 @@ func (game *Game) AttachView(view sdk.View) {
 
 	android.AttachView(view, game.state.LayoutId)
 }
+

@@ -26,6 +26,7 @@ var actions = map[string]Action{
 	"monster":               &MonsterAction{},
 	"father_dream":          &FatherDreamAction{},
 	"stage_1_family_bunk_1": &FamilyBunkAction{},
+	"hagrid":                &HagridAction{},
 }
 
 func init() {
@@ -44,6 +45,7 @@ func init() {
 	locations["kitchen"].LinkAction(actions["boxes"])
 	locations["kitchen"].LinkAction(actions["monster"])
 	locations["kitchen"].LinkAction(actions["father_dream"])
+	locations["kitchen"].LinkAction(actions["hagrid"])
 
 	// Story started here
 	locations["family_bunk"].LinkAction(actions["stage_1_family_bunk_1"])
@@ -58,7 +60,7 @@ func start() {
 	//origin := Locations["game_room"]
 	//origin.Draw()
 	game = &Game{}
-	game.SetLocation(locations["family_bunk"])
+	game.SetLocation(locations["kitchen"])
 	game.SetCurrentStage(1)
 	game.Start()
 }
