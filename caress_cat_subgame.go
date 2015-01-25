@@ -1,8 +1,6 @@
 package main
 
 import (
-	"log"
-
 	"github.com/seletskiy/go-android-rpc/android"
 	"github.com/seletskiy/go-android-rpc/android/sdk"
 )
@@ -17,6 +15,33 @@ func (subgame CaressCatSubgame) GetButtonTitle() string {
 
 func (subgame CaressCatSubgame) GetLayoutName() string {
 	return "main_layout"
+}
+
+func (subgame CaressCatSubgame) Enter(state *State) {
+	subgame.Subgame.Enter(state)
+
+	defer android.PanicHandler()
+
+	main := &CaressCatLocation{game: &subgame}
+
+	main.Link(globalLocations["home"])
+
+	subgame.Link(globalLocations["home"])
+	subgame.SetLocation(main)
+
+	subgame.Start()
+}
+
+type CaressCatOnClickHandler struct {
+	button sdk.Button
+	state  *State
+}
+
+func (handler CaressCatOnClickHandler) OnClick() {
+	handler.button.PerformHapticFeedback(0)
+	handler.state.Progress++
+	handler.state.Cat++
+	handler.state.MoveCounter++
 }
 
 type CaressCatLocation struct {
@@ -34,7 +59,6 @@ func (location CaressCatLocation) GetHeader() string {
 }
 
 func (location CaressCatLocation) Enter(state *State) {
-	log.Printf("caress_cat_subgame.go:29 %#v", location.game)
 	caressButton := location.game.CreateView(
 		"android.widget.Button",
 	).(sdk.Button)
@@ -47,32 +71,4 @@ func (location CaressCatLocation) Enter(state *State) {
 	})
 
 	location.game.AttachView(caressButton.View)
-}
-
-func (subgame CaressCatSubgame) Enter(state *State) {
-	subgame.Subgame.Enter(state)
-
-	defer android.PanicHandler()
-
-	main := &CaressCatLocation{game: &subgame}
-
-	main.Link(globalLocations["home"])
-
-	subgame.Link(globalLocations["home"])
-	log.Printf("caress_cat_subgame.go:45 %#v", subgame)
-	subgame.SetLocation(main)
-
-	subgame.Start()
-}
-
-type CaressCatOnClickHandler struct {
-	button sdk.Button
-	state  *State
-}
-
-func (handler CaressCatOnClickHandler) OnClick() {
-	handler.button.PerformHapticFeedback(0)
-	handler.state.Progress++
-	handler.state.Cat++
-	handler.state.MoveCounter++
 }
