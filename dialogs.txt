@@ -10,6 +10,7 @@ cherishing hope to find new better home to live. One way ticket.
 No way back.
 
 
+
 Monster action.
 ===============
 
@@ -82,7 +83,7 @@ Your father puts you on your feet.
 
 7.2.[End]
 
-Father takes your away from Imaginarium and locks the door on magnet lock.
+Father takes you away from Imaginarium and locks the door on magnet lock.
 
 
 
@@ -90,6 +91,7 @@ Stage 1
 =======
 
 [[Dark object appeared far on the ship's way.]]
+
 
 Family bunk 1
 -------------
@@ -120,14 +122,32 @@ settlers on new planet.
 Purr. {Vibrate, sound. `State.春++`}
 
 2.2.[Disregard 春.]
-* ??? Random consequences? Lol.
 
 3.[Go outside].
 
-// Directions: {Lobby}.
-//
-* // Stage 2 transition.
-* // Short briefing on TV about discovered planet. "Details later".
+{Directions}
+    Lobby
+{/Directions}
+
+{Transition}
+    The program interrupts on father's TV.
+
+    Presenter:
+    "Great news, everyone. Our research team discovered a huge space object.
+    It seems we've found a planet. Deep research required.
+    Will keep you informed."
+
+    You:
+    "Hmm, dad... What does it mean?"
+
+    Father sighs:
+    "Well..."
+
+    TV program resumes. Dad stares at you, frowns, blinks a couple of time and
+    continues to watch TV.
+
+    You sighs in response.
+{/Transition}
 
 
 Lobby 1
@@ -140,6 +160,13 @@ One hundred steps upper and you will find yourself near captain's cabin. Halfway
 up located a big dining room. You hear voices.
 
 Thin red lines along the walls will bring you to medcentre.
+
+Captain is in a hurry to his cabin with a few people of his crew.
+He argues with the crew. You hear he said about approaching something
+significant. You never saw him so excited.
+
+Crying woman is sitting near fountain imitation.
+
 
 1.1.[Go upward.]
 
@@ -187,36 +214,55 @@ Now you believe the monster wasn't so scary.
 
 1.5.[Listen to the distant voices.]
 
-Distant laugh. You don't remember when you heard that last time.
+Distant laugh. You can't remember the last time you've heard it.
 {`State.Interest++`}
 
-// {once}
-//     1.6.
-//     Captain: inspired. We're approaching something significant.
-//     We're approaching something significant. You'll be the first to know.
-// {/once}
-//
-// 1.7.
+{once}
+    1.6.[Try to understand, what's captain talking about.]
+    Captain catches your gaze. He interrupts his conversation and goes
+    to you.
+
+    Captain almost whispers:
+
+    How are you, kid?
+    I know, you have a dream. Believe yourself. Just believe yourself.
+
+    1.6.1.[End.]
+
+    You catch captain's blinking glance. Captain returns to his crew.
+{/once}
+
+1.7.[Go to crying woman.]
 // Crying woman: it was so good on Earth. Sunset and autumn' colours.
 // You answer your cat's name is 春. You barely understand her.
 
-// Directions: {Family bunk}, {Near captain's cabin}, {Toilet}, {Medroom}, {Dining room}.
-//
-* // Stage 2 transition.
-* // Short briefing on intercom about discovered planet. "Details later".
+{Directions}
+    Family bunk
+    Near captain's cabin
+    Toilet
+    Medroom
+    Dining room
+{/Directions}
+
+{Transition}
+    // Short briefing on intercom about discovered planet. "Details later".
+{/Transition}
+
 
 Near captain's cabin 1
 ----------------------
 
 // You see lots of people fussing around.
 // No one stops to talk with you.
-// Every second somebody goes in on out the cabin.
-//
-// Directions: {Lobby}.
-//
-* // Stage 2 transition.
-* // You've hears captain's voice through opened door. He is encouraged
-* // about discovery.
+// Every second somebody goes in and out the cabin.
+
+{Directions}
+    Lobby
+{/Directions}
+
+{Transition}
+    // You've heard captain's voice through opened door. He is encouraged.
+{/Transition}
 
 
 Medroom 1
@@ -227,21 +273,25 @@ Medroom 1
 // You say about crying woman. Still nothing.
 // You say you've seen captain. Nobody's home.
 //
-// Directions: {Lobby}.
-//
-* // Stage 2 transition.
-* // ?
+{Directions}
+    Lobby
+{/Directions}
+
+{Transition}
+{/Transition}
 
 
 Dining room 1
 --------------
 
-// Cook gives you some 
-//
-// Directions: {Lobby}.
-//
-* // Stage 2 transition.
-* // ?
+// Cook gives you some buns. It's unusual.
+
+{Directions}
+    Lobby
+{/Directions}
+
+{Transition}
+{/Transition}
 
 
 
@@ -251,32 +301,70 @@ Stage 2
 [[Dark object is being slightly touched by spectroanalysis.
 It's a planet with a great chance to be settled.]]
 
+
 Family bunk 2
 --------------
-//
-* // Directions: ?
-* // Stage 3 transition.
-* // ?
+
+{Directions}
+    Lobby
+{/Directions}
+
+{Transition}
+{/Transition}
+
+
 Lobby 2
 -------
-* // Directions: ?
-* // Stage 3 transition.
-* // ?
+
+{Directions}
+    Family bunk
+    Near captain's cabin
+    Toilet
+    Medroom
+    Dining room
+{/Directions}
+
+{Transition}
+{/Transition}
+
+
 Near captain's cabin 2
 ----------------------
-* // Directions: ?
-* // Stage 3 transition.
-* // ?
+
+{Directions}
+    Lobby
+{/Directions}
+
+{Transition}
+{/Transition}
+
+
 Medroom 2
 ---------
-* // Directions: ?
-* // Stage 3 transition.
-* // ?
+
+{Directions}
+    Lobby
+{/Directions}
+
+{Transition}
+{/Transition}
+
+
 Dining room 2
 -------------
-* // Directions: ?
-* // Stage 3 transition.
-* // ?
+
+{Directions}
+    Lobby
+{/Directions}
+
+{Transition}
+{/Transition}
+
+
+{Directions}
+    Lobby
+{/Directions}
+
 
 
 Stage 3
@@ -286,31 +374,65 @@ Stage 3
 and can't be settled. But there's some chance that resources
 from planet remainings can be used to refuel.]]
 
+
 Family bunk 3
 --------------
-* // Directions: ?
-* // Stage 4 transition.
-* // ?
+
+{Directions}
+    Lobby
+{/Directions}
+
+{Transition}
+{/Transition}
+
+
 Lobby 3
 -------
-* // Directions: ?
-* // Stage 4 transition.
-* // ?
+
+{Directions}
+    Family bunk
+    Near captain's cabin
+    Toilet
+    Medroom
+    Dining room
+{/Directions}
+
+{Transition}
+{/Transition}
+
+
 Near captain's cabin 3
 ----------------------
-* // Directions: ?
-* // Stage 4 transition.
-* // ?
+
+{Directions}
+    Lobby
+{/Directions}
+
+{Transition}
+{/Transition}
+
+
 Medroom 3
 ---------
-* // Directions: ?
-* // Stage 4 transition.
-* // ?
+
+{Directions}
+    Lobby
+{/Directions}
+
+{Transition}
+{/Transition}
+
+
 Dining room 3
 -------------
-* // Directions: ?
-* // Stage 4 transition.
-* // ?
+
+{Directions}
+    Lobby
+{/Directions}
+
+{Transition}
+{/Transition}
+
 
 
 Stage 4
@@ -320,27 +442,72 @@ Stage 4
 absolutely no chance to refuel and that the remainings belong
 to Earth.]]
 
+
 Family bunk 4
 --------------
-* // Directions: ?
+
+{Directions}
+    Lobby
+{/Directions}
+
+{Transition}
+{/Transition}
+
+
 Lobby 4
 -------
-* // Directions: ?
+
+{Directions}
+    Family bunk
+    Near captain's cabin
+    Toilet
+    Medroom
+    Dining room
+{/Directions}
+
+{Transition}
+{/Transition}
+
+
 Near captain's cabin 4
 ----------------------
-* // Directions: ?
+
+{Directions}
+    Lobby
+{/Directions}
+
+{Transition}
+{/Transition}
+
+
 Medroom 4
 ---------
-* // Directions: ?
+
+{Directions}
+    Lobby
+{/Directions}
+
+{Transition}
+{/Transition}
+
+
 Dining room 4
 -------------
-* // Directions: ?
+
+{Directions}
+    Lobby
+{/Directions}
+
+{Transition}
+{/Transition}
+
 
 
 Stage 5
 =======
 
 [[No hope. Ship is dying. No one to survive.]]
+
 
 // 1.
 // You tried to find your parents. Dead is dead on the couch. Mother is missing.
