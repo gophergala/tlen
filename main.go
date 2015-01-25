@@ -18,15 +18,18 @@ var locations = map[string]Location{
 	"kitchen":     NewTestLocation("kitchen", "kitchen desc"),
 	"outside":     NewTestLocation("outside", "outside desc"),
 	"shop":        NewTestLocation("shop", "shop desc"),
-	"family_bunk": NewTestLocation("family bunk", "just another bunkroom"),
+	"family_bunk": &FamilyBunkLocation{},
 }
 
 var actions = map[string]Action{
-	"boxes":                 &BoxesAction{},
-	"monster":               &MonsterAction{},
-	"father_dream":          &FatherDreamAction{},
+	"boxes":        &BoxesAction{},
+	"monster":      &MonsterAction{},
+	"father_dream": &FatherDreamAction{},
+
 	"stage_1_family_bunk_1": &FamilyBunkAction{},
-	"hagrid":                &HagridAction{},
+	//"stage_1_caress_cat":    &StageOneCaressCat{},
+
+	"hagrid": &HagridAction{},
 }
 
 func init() {

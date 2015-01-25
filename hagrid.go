@@ -32,9 +32,9 @@ func (action HagridAction) Run() {
 	action.State = make(map[int]bool)
 
 	action.State = map[int]bool{
-		1: false, 2: false, 3: false,
-		4: false, 5: false, 6: false,
-		7: false, 8: false, 9: false,
+		1: false, 2: true, 3: false,
+		4: true, 5: false, 6: true,
+		7: false, 8: true, 9: false,
 	}
 
 	log.Printf("%#v", action)

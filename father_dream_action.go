@@ -10,13 +10,13 @@ import (
 )
 
 type FatherDreamAction struct {
-	minX float64
-	minY float64
-	minZ float64
-	maxX float64
-	maxY float64
-	maxZ float64
-	tick int64
+	minX     float64
+	minY     float64
+	minZ     float64
+	maxX     float64
+	maxY     float64
+	maxZ     float64
+	tick     int64
 	descView sdk.TextView
 }
 
@@ -48,7 +48,6 @@ func (action *FatherDreamAction) Run() {
 	action.descView = desc
 	game.AttachView(desc.View)
 
-
 	sensors := zhash.HashFromMap(android.GetSensorsList())
 	accelerometerId, err := sensors.GetString(
 		"sensors", "TYPE_ACCELEROMETER",
@@ -68,7 +67,6 @@ func (action *FatherDreamAction) afterWakeUp() {
 	log.Printf("%#v\n", action.descView)
 	action.descView.SetText1s("WINNER")
 }
-
 
 func (action *FatherDreamAction) OnChangeAccelerometerData(values []float64) {
 	x := values[0]
