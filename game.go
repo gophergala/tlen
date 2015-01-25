@@ -15,6 +15,7 @@ type State struct {
 	LayoutName   string
 	MoveCounter  int
 	CurrentStage int
+	GameProgress int
 }
 
 type Game struct {
