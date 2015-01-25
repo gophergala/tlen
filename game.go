@@ -9,8 +9,8 @@ import (
 )
 
 type State struct {
-	Location Location
-	//Action   *Action
+	Location   Location
+	Action     Action
 	LayoutId   string
 	LayoutName string
 }
@@ -50,9 +50,6 @@ func (game *Game) SwitchLayout() {
 func (game *Game) Start() {
 	game.SetLayoutName("main_layout")
 
-	log.Printf("%#v\n", game)
-	log.Printf("%#v\n", game.state)
-
 	game.headerView = android.GetViewById("header_text").(sdk.TextView)
 
 	game.descView = android.GetViewById("desc_text").(sdk.TextView)
@@ -64,8 +61,6 @@ func (game *Game) Start() {
 
 func (game *Game) ClearViews() {
 	for _, view := range game.viewObjects[game.state.LayoutName] {
-		log.Printf("game.go:68 %#v", view)
-		log.Printf("game.go:68 %#v", game.state.LayoutId)
 		android.RemoveView(view, game.state.LayoutId)
 	}
 
@@ -79,6 +74,8 @@ func (game *Game) SwitchLocation() {
 
 	game.headerView.SetText1s(location.GetHeader())
 	game.descView.SetText1s(location.GetDescription())
+
+	game.SetLocationArterfactsVisibility(true)
 
 	linkedLocations := location.GetLinkedLocations()
 	for _, linkedLocation := range linkedLocations {
@@ -108,7 +105,33 @@ func (game *Game) RunAction(action Action) {
 	game.SetLayoutName(layout)
 	game.SwitchLayout()
 
+	game.SetLocationArterfactsVisibility(false)
+
+	game.state.Action = action
 	action.Run()
+}
+
+func (game *Game) SetLocationArterfactsVisibility(should bool) {
+	headerVisible, _ := game.headerView.IsShown()
+	descVisible, _ := game.descView.IsShown()
+
+	if should {
+		if !headerVisible {
+			game.headerView.SetVisibility(ViewVisible)
+		}
+		if !descVisible {
+			game.descView.SetVisibility(ViewVisible)
+		}
+
+	} else {
+		if headerVisible {
+			game.headerView.SetVisibility(ViewGone)
+		}
+
+		if descVisible {
+			game.descView.SetVisibility(ViewGone)
+		}
+	}
 }
 
 func (game *Game) LocationOnClick(button sdk.Button, location Location) {
@@ -148,7 +171,6 @@ func (game *Game) CreateView(viewName string) interface{} {
 func (game *Game) AttachView(view sdk.View) {
 	game.viewObjects[game.state.LayoutName] = append(
 		game.viewObjects[game.state.LayoutName], view)
-	log.Printf("game.go:152 %#v", view)
-	log.Printf("game.go:152 %#v", game.state.LayoutId)
+
 	android.AttachView(view, game.state.LayoutId)
 }
