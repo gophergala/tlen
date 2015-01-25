@@ -86,8 +86,10 @@ Father takes your away from Imaginarium and locks the door on magnet lock.
 
 
 
-STAGE 1
+Stage 1
 =======
+
+[[Dark object appeared far on the ship's way.]]
 
 Family bunk 1
 -------------
@@ -118,10 +120,14 @@ settlers on new planet.
 Purr. {Vibrate, sound. `State.春++`}
 
 2.2.[Disregard 春.]
-
-??? Random consequences? Lol.
+* ??? Random consequences? Lol.
 
 3.[Go outside].
+
+// Directions: {Lobby}.
+//
+* // Stage 2 transition.
+* // Short briefing on TV about discovered planet. "Details later".
 
 
 Lobby 1
@@ -171,11 +177,11 @@ Thin red lines along the walls will bring you to medcentre.
     {/if}
 {/once}
 
-{once}
-    1.4.[Go to the toilet near the lobby entrance.]
+1.4.[Go to the toilet near the lobby entrance.]
 
-    You made it. It was hard successive work. You look at what you've done.
-    Now you believe the monster wasn't so scary.
+You made it. It was hard successive work. You look at what you've done.
+Now you believe the monster wasn't so scary.
+{once}
     {`State.Anxiety--`}
 {/once}
 
@@ -194,6 +200,10 @@ Distant laugh. You don't remember when you heard that last time.
 // Crying woman: it was so good on Earth. Sunset and autumn' colours.
 // You answer your cat's name is 春. You barely understand her.
 
+// Directions: {Family bunk}, {Near captain's cabin}, {Toilet}, {Medroom}, {Dining room}.
+//
+* // Stage 2 transition.
+* // Short briefing on intercom about discovered planet. "Details later".
 
 Near captain's cabin 1
 ----------------------
@@ -203,6 +213,10 @@ Near captain's cabin 1
 // Every second somebody goes in on out the cabin.
 //
 // Directions: {Lobby}.
+//
+* // Stage 2 transition.
+* // You've hears captain's voice through opened door. He is encouraged
+* // about discovery.
 
 
 Medroom 1
@@ -214,6 +228,9 @@ Medroom 1
 // You say you've seen captain. Nobody's home.
 //
 // Directions: {Lobby}.
+//
+* // Stage 2 transition.
+* // ?
 
 
 Dining room 1
@@ -222,64 +239,122 @@ Dining room 1
 // Cook gives you some 
 //
 // Directions: {Lobby}.
+//
+* // Stage 2 transition.
+* // ?
 
 
 
 Stage 2
 =======
 
+[[Dark object is being slightly touched by spectroanalysis.
+It's a planet with a great chance to be settled.]]
+
 Family bunk 2
 --------------
+//
+* // Directions: ?
+* // Stage 3 transition.
+* // ?
 Lobby 2
 -------
+* // Directions: ?
+* // Stage 3 transition.
+* // ?
 Near captain's cabin 2
 ----------------------
+* // Directions: ?
+* // Stage 3 transition.
+* // ?
 Medroom 2
 ---------
+* // Directions: ?
+* // Stage 3 transition.
+* // ?
 Dining room 2
 -------------
+* // Directions: ?
+* // Stage 3 transition.
+* // ?
 
 
 Stage 3
 =======
 
+[[Deep research made it clear the planet's been destroyed
+and can't be settled. But there's some chance that resources
+from planet remainings can be used to refuel.]]
+
 Family bunk 3
 --------------
+* // Directions: ?
+* // Stage 4 transition.
+* // ?
 Lobby 3
 -------
+* // Directions: ?
+* // Stage 4 transition.
+* // ?
 Near captain's cabin 3
 ----------------------
+* // Directions: ?
+* // Stage 4 transition.
+* // ?
 Medroom 3
 ---------
+* // Directions: ?
+* // Stage 4 transition.
+* // ?
 Dining room 3
 -------------
+* // Directions: ?
+* // Stage 4 transition.
+* // ?
 
 
 Stage 4
 =======
 
+[[Approaching the planet remainings shown that there is
+absolutely no chance to refuel and that the remainings belong
+to Earth.]]
+
 Family bunk 4
 --------------
+* // Directions: ?
 Lobby 4
 -------
+* // Directions: ?
 Near captain's cabin 4
 ----------------------
+* // Directions: ?
 Medroom 4
 ---------
+* // Directions: ?
 Dining room 4
 -------------
+* // Directions: ?
 
 
-High level logical stages
-=========================
+Stage 5
+=======
 
-Stage 1. Dark object appeared far on the ship's way.
-Stage 2. Dark object is being slightly touched by spectroanalysis.
-It's a planet with a great chance to be settled.
-Stage 3. Deep research made it clear the planet's been destroyed
-and can't be settled. But there's some chance that resources
-from planet remainings can be used to refuel.
-Stage 4. Approaching the planet remainings shown that there is
-absolutely no chance to refuel and that the remainings belong
-to Earth.
-Stage 5. No hope. Ship is dying. No one to survive.
+[[No hope. Ship is dying. No one to survive.]]
+
+// 1.
+// You tried to find your parents. Dead is dead on the couch. Mother is missing.
+// If State.春 > X you're dying in your room with 春.
+// Else you die alone with the question, why do they leave you.
+
+// 2.
+// You're trying to escape among others on rescue capsule.
+// You drift many days watching dead planet remainings.
+// After long time of isolation, you die with some relief.
+
+// 3.
+// You're scared and try to hide when panic began. You're fagged out.
+// Accidentally, you drop into sleep. When you woke up, you find yourself
+// alone (or with 春). You try to find somebody, but no survivors left
+// on the ship. You've found some photos here and there. One of the photos
+// was picture of your with crooked signature "missing" written by your mother.
