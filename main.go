@@ -25,7 +25,7 @@ var actions = map[string]Action{
 	"boxes":                 &BoxesAction{},
 	"monster":               &MonsterAction{},
 	"father_dream":          &FatherDreamAction{},
-	"stage_1_family_bunk_1": &StageOneFamilyBunkOne{},
+	"stage_1_family_bunk_1": &FamilyBunkAction{},
 }
 
 func init() {

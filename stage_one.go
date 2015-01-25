@@ -2,21 +2,69 @@ package main
 
 import "log"
 
-type StageOneFamilyBunkOne struct{}
+type FamilyBunkAction struct{}
 
-func (action StageOneFamilyBunkOne) GetButtonTitle() string {
+func (action FamilyBunkAction) GetButtonTitle() string {
 	return "Stage 1"
 }
 
-func (action StageOneFamilyBunkOne) GetLayoutName() string {
+func (action FamilyBunkAction) GetLayoutName() string {
 	return "main_layout"
 }
 
-func (action StageOneFamilyBunkOne) Run() {
+type ScreenText struct {
+	Description string
+	Button      map[int]string
+}
+
+func (action FamilyBunkAction) Run() {
+	topTitle := "Family bunk"
+
+	topDescription := `You're in your family bunk. You see 春. The door to Imaginarium is closed.`
+
+	text := map[int]ScreenText{
+		0: ScreenText{
+			Button: map[int]string{
+				0: `"Hey, dad! The monster was sooo scary!"`,
+			},
+		},
+		1: ScreenText{
+			Description: `
+"Huh?"
+
+Dad turns on TV. You hear how presenter of the TV program tells you about new planet, detected at the edge of the ship's radars range.`,
+			Button: map[int]string{
+				0: `"It tried to hurt me! But I was brave."`,
+				1: `"I was so scared!"`,
+			},
+		},
+		2: ScreenText{
+			Description: `
+Dad is watching TV.
+
+"Go see your mother. She needs to check you after hibernation."
+
+Presenter continues to talk about all the possibilities that awaits you and 3'000 settlers on new planet.`,
+			Button: map[int]string{
+				0: `Ignore TV and dad`,
+			},
+		},
+		3: ScreenText{
+			Button: map[int]string{
+				0: `Caress 春`,
+				1: `Disregard 春`,
+			},
+		},
+		4: ScreenText{
+			Button: map[int]string{
+				0: `Go outside`,
+			},
+		},
+	}
 
 	answerFive := Scenarios{
 		&Scenario{
-			Title: `Go outside`,
+			Title: text[4].Button[0],
 			PreDraw: func(scenario *Scenario) bool {
 				log.Printf("!!! %#v\n", "lobby one")
 				//replace recursion with next location
@@ -29,15 +77,16 @@ func (action StageOneFamilyBunkOne) Run() {
 
 	answersFour := Scenarios{
 		&Scenario{
-			Title: `Caress 春`,
+			Title: text[3].Button[0],
 			PreDraw: func(scenario *Scenario) bool {
 				log.Printf("!!! %#v\n", "put murr and huptic touch here")
 				return true
 			},
 			Answers: answerFive,
 		},
+
 		&Scenario{
-			Title: `Disregard 春`,
+			Title: text[3].Button[1],
 			PreDraw: func(scenario *Scenario) bool {
 				log.Printf("!!! %#v\n", "bad choice for you")
 				return true
@@ -48,43 +97,35 @@ func (action StageOneFamilyBunkOne) Run() {
 
 	answerThree := Scenarios{
 		&Scenario{
-			Title:       `Ignore TV and dad`,
-			Description: ``,
-			Answers:     answersFour,
+			Title:   text[2].Button[0],
+			Answers: answersFour,
 		},
 	}
 
-	answersTwoDescription := `Dad is watching TV.
-
-"Go see your mother. She needs to check you after hibernation."
-Presenter continues to talk about all the possibilities that awaits you and 3'000 settlers on new planet.`
-
 	answersTwo := Scenarios{
 		&Scenario{
-			Title:       `"It tried to hurt me! But I was brave."`,
-			Description: answersTwoDescription,
+			Title:       text[1].Button[0],
+			Description: text[2].Description,
 			Answers:     answerThree,
 		},
 		&Scenario{
-			Title:       `"I was so scared!"`,
-			Description: answersTwoDescription,
+			Title:       text[1].Button[1],
+			Description: text[2].Description,
 			Answers:     answerThree,
 		},
 	}
 
 	answerOne := Scenarios{
 		&Scenario{
-			Title: `"Hey, dad! The monster was sooo scary!"`,
-			Description: `"Huh?"
-
-Dad turns on TV. You hear how presenter of the TV program tells you about new planet, detected at the edge of the ship's radars range.`,
-			Answers: answersTwo,
+			Title:       text[0].Button[0],
+			Description: text[1].Description,
+			Answers:     answersTwo,
 		},
 	}
 
 	stageOneScenario := &Scenario{
-		Title:       "Family bunk",
-		Description: `You're in your family bunk. You see 春. The door to Imaginarium is closed.`,
+		Title:       topTitle,
+		Description: topDescription,
 		Answers:     answerOne,
 	}
 
