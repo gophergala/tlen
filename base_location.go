@@ -5,6 +5,7 @@ type Location interface {
 	GetDescription() string
 	LinkLocation(Location)
 	LinkAction(Action)
+	UnlinkAction(Action)
 	GetLinkedLocations() []Location
 	GetLinkedActions() []Action
 }
@@ -28,4 +29,18 @@ func (location *BaseLocation) LinkAction(nextAction Action) {
 
 func (location *BaseLocation) GetLinkedActions() []Action {
 	return location.LinkedActions
+}
+
+func (location *BaseLocation) UnlinkAction(action Action) {
+	newLinkedActions := []Action{}
+
+	for _, linkedAction := range location.LinkedActions {
+		if action.GetButtonTitle() == linkedAction.GetButtonTitle() &&
+			action.GetLayoutName() == linkedAction.GetLayoutName() {
+			continue
+		}
+		newLinkedActions = append(newLinkedActions, linkedAction)
+	}
+
+	location.LinkedActions = newLinkedActions
 }
