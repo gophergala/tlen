@@ -22,6 +22,7 @@ var globalLocations = map[string]Location{
 	"shop":     NewTestLocation("shop", "shop desc"),
 	"monster":  &MonsterSubgame{},
 	"cat_bunk": &CaressCatSubgame{},
+	"wakeup_father_subgame": &WakeUpFatherSubgame{},
 }
 
 func init() {
@@ -33,6 +34,7 @@ func init() {
 	globalLocations["outside"].Link(globalLocations["shop"])
 	globalLocations["outside"].Link(globalLocations["home"])
 	globalLocations["outside"].Link(globalLocations["kitchen"])
+	globalLocations["outside"].Link(globalLocations["wakeup_father_subgame"])
 
 	globalLocations["shop"].Link(globalLocations["outside"])
 
