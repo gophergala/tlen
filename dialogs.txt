@@ -227,6 +227,9 @@ Distant laugh. You can't remember the last time you've heard it.
     How are you, kid?
     I know, you have a dream. Believe yourself. Just believe yourself.
 
+    Dad is watching TV. You see complicated pattern of  circles on screen.
+
+    - 
     1.6.1.[End.]
 
     You catch captain's blinking glance. Captain returns to his crew.
@@ -335,6 +338,20 @@ Family bunk 2
 {/Directions}
 
 {Transition}
+    Dad is watching TV. You see complicated pattern of circles on screen.
+
+    1.[What is it?]
+
+    "It's our new home, kid."
+
+    "...spectral analysis shows that this planet has very Earth-like soil..."
+    voice continue in the TV show.
+
+    2.[What is spectral analysys?]
+
+    The dad most likely did not notice you.
+
+    3.[End]
 {/Transition}
 
 
@@ -350,6 +367,7 @@ Lobby 2
 {/Directions}
 
 {Transition}
+    The silence in lobby disturbing only by rumble of engines.
 {/Transition}
 
 
@@ -372,6 +390,8 @@ Medroom 2
 {/Directions}
 
 {Transition}
+    // simple magnet lock game?
+    // took something from there, so future will change.
 {/Transition}
 
 
@@ -383,12 +403,43 @@ Dining room 2
 {/Directions}
 
 {Transition}
+    You see almost all of the awakened crew of the spaceship in the dinning room.
+    They all whispering to each other, waiting.
+
+    Giant TV screen shows "Acquiring high resolution images."
+
+    1.[Wait].
+
+    TV screen does not changes. People keep murmuring. You notice strange
+    woman, which have both sadness and happy feelings, mixed up on her face.
+
+    2.[Come closer to woman]
+
+    She began speak to you.
+
+    "I'll miss that autumn evenings on the Earth. Who knows what awaits us
+    on that planet?.."
+
+    3.1.["Dad says it just fine. Spectral things are good."]
+
+        Woman keeps speaaking no matter of your remark.
+        // cat attracted 1
+
+    3.2.[Keep listening.]
+
+    "...I doubt we ever see some trees there. What if there are no trees?"
+
+    4.1.["I did not see any tree..."]
+
+        You feel tender touch at your left foot. Your cat attracted by your voice.
+
+        // some cat actions
+
+    4.2.[Leave he alone]
+
+        // no cat for you
+
 {/Transition}
-
-
-{Directions}
-    Lobby
-{/Directions}
 
 
 
