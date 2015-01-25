@@ -10,7 +10,7 @@ import (
 
 type HagridAction struct {
 	Relations map[int][]int
-	Buttons   map[int]sdk.ToggleButton
+	Buttons   map[int]sdk.Switch
 	State     map[int]bool
 }
 
@@ -28,7 +28,7 @@ func (action HagridAction) Run() {
 	//     4 5 6
 	//     7 8 9
 	action.Relations = make(map[int][]int)
-	action.Buttons = make(map[int]sdk.ToggleButton)
+	action.Buttons = make(map[int]sdk.Switch)
 	action.State = make(map[int]bool)
 
 	action.State = map[int]bool{
@@ -71,7 +71,7 @@ func (action HagridAction) Run() {
 
 	for i := 1; i <= 9; i++ {
 		button := android.GetViewById(
-			"toggle_button_" + strconv.Itoa(i)).(sdk.ToggleButton)
+			"toggle_button_" + strconv.Itoa(i)).(sdk.Switch)
 
 		android.OnClick(button, HagridOnClickHandler{
 			i,

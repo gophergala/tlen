@@ -5,6 +5,8 @@
 	android:versionCode="1"
 	android:versionName="1.0">
 
+    <uses-sdk android:minSdkVersion="14" />
+
 	<application android:theme="@style/AppTheme">
 		<activity android:name="com.goandroidrpc.rpc.MainActivity"
 			android:label="goandroidrpc"
