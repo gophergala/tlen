@@ -55,62 +55,62 @@ You feel pain.
 You feel dark presence goes away.
 
 You suddenly became aware of your body. Rumbling around you. Low and pleasant
-rumbling. R-r-r-r-r. Like a tiger. Like a... engines. Ginormous photon engines.
-You waking up.
+rumbling. G-r-r-r-r. Like a tiger. Like a... an engines. Ginormous photon engines.
+You're waking up.
 
-You see you father. You feel bright pain.
+You're seing you father. You're feeling bright pain.
 
 4.[Cry]
 
-Your father looking at you with question in his eyes.
+Your father is looking at you inquiringly.
 
 "It's a just bad dream.", he says.
 
-5.["I fight with monster!"]
+5.["I've fought with a monster!"]
 
-You father taking you on your foots.
+Your father puts you on your feet.
 
 6.["I feel pain!"]
 
 "You better see mom. She's our lovely doctor."
 
-7.1.["We are at home?"]
+7.1.["Are we home?"]
 
-"Not yet. But it looks like we are so close". Grin touches your fathers lips.
+"Not yet. But it looks like we are so close". Grin touches your father's lips.
 
 7.2.[End]
 
-Father takes your away from Imaginarium and closes door on magnet lock.
+Father takes your away from Imaginarium and locks the door on magnet lock.
 
 
 Ship. Family bunk location.
 
-You in your family bunk. You see cat. Door to Imaginarium is closed.
+You're in your family bunk. You see 春. The door to Imaginarium is closed.
 
 1.1.["Hey, dad! The monster was sooo scary!"]
 
 "Huh?"
 
 Dad turns on TV. You hear how presenter of the TV program tells you about
-new planet, detected at the edge of the ship radars range.
+new planet, detected at the edge of the ship's radars range.
 
-1.2.1.["He tries to hurt me! But I'm a brave boy."]
+1.2.1.["It tried to hurt me! But I was brave."]
 1.2.2.["I was so scared!"]
 
 Dad is watching TV.
 
-"Go to see your mother. She will need to check you after hibernation."
+"Go see your mother. She needs to check you after hibernation."
 
-Presenter continues talking about all possibilities that awaits you and 3'000
+Presenter continues to talk about all the possibilities that awaits you and 3'000
 settlers on new planet.
 
 1.2.3.[Ignore TV and dad.]
 
-2.1.[Caress your cat.]
+2.1.[Caress 春.]
 
-Purr. {Vibrate, sound. `State.Cat++` in state}
+Purr. {Vibrate, sound. `State.春++` in state}
 
-2.2.[Disregard your cat.]
+2.2.[Disregard 春.]
 
 ??? Random consequences? Lol.
 
@@ -119,11 +119,11 @@ Purr. {Vibrate, sound. `State.Cat++` in state}
 
 Lobby location.
 
-You in the lobby. You hear soft rumble of the engines, which carries you and
-your parents long before you came through darkness of the universe.
+You're in the lobby. You hear soft rumble of engines, which carries you and
+your parents long before you came through the darkness of the universe.
 
 One hundred steps upper and you will find yourself near captain's cabin. Halfway
-up located a big dinning room. You hear voices.
+up located a big dining room. You hear voices.
 
 Thin red lines along the walls will bring you to medcentre.
 
@@ -138,7 +138,7 @@ Thin red lines along the walls will bring you to medcentre.
 {just once}
 1.3.[Stand still and listen to engines rumble.]
 
-R-r-r-r. You always like sound of the engines. Pretty much as anyone on the
+G-r-r-r. You always loved the sound of engines. Pretty much as anyone on the
 ship.
 
 1.* choices except 1.3.
@@ -148,24 +148,24 @@ You almost immerse in tender voice of engines. The tone is very low and deep.
 It covers you like silk blanket. You feel floor vibrating in almost negligible
 jolts with entraining repetitive pattern.
 
-{only if `State.Cat >= 1`}
-You see cat comes to you.
+{only if `State.春 >= 1`}
+You see 春 is coming to you.
 
-1.3.1.1.[Ignore cat and pay attention to vibrating pattern on the floor.]
-You feel anxiety. You always liked engines and how they sound. In place you
-uneasy.
+1.3.1.1.[Ignore 春 and pay attention to vibrating pattern on the floor.]
+You feel anxiety. You always loved engines and how they sound. You're getting
+uncomfortable.
 
 {`State.Anxiety++`}
 
-1.3.2.[Let cat on your knees.]
+1.3.2.[Let 春 on your knees.]
 
-{Vibrate. `State.Cat++`}
+{Vibrate. `State.春++`}
 {/if}
 {/end}
 
 1.4.[Listen to the distant voices.]
 
-Distance laugh. You did not remember, when you hear that last time.
+Distance laugh. You don't remember when you hear that last time.
 
 {`State.Interest++`}
 
