@@ -1,4 +1,5 @@
 Prologue.
+~~~~~~~~~
 
 It's been 45 years since the Expedition begun. The obvious
 and rational evolution of human technologies allowed to build
@@ -10,6 +11,7 @@ No way back.
 
 
 Monster action.
+===============
 
 It is pitch black. You try to make a move to escape,
 but barely feel your body. Just powerful clammy darkness and strange
@@ -72,7 +74,7 @@ Your father puts you on your feet.
 
 6.["I feel pain!"]
 
-"You better see mom. She's our lovely doctor."
+"You'd better see your mom. She's our lovely doctor."
 
 7.1.["Are we home?"]
 
@@ -83,7 +85,12 @@ Your father puts you on your feet.
 Father takes your away from Imaginarium and locks the door on magnet lock.
 
 
-Ship. Family bunk location.
+
+STAGE 1
+=======
+
+Family bunk 1
+-------------
 
 You're in your family bunk. You see 春. The door to Imaginarium is closed.
 
@@ -108,7 +115,7 @@ settlers on new planet.
 
 2.1.[Caress 春.]
 
-Purr. {Vibrate, sound. `State.春++` in state}
+Purr. {Vibrate, sound. `State.春++`}
 
 2.2.[Disregard 春.]
 
@@ -117,7 +124,8 @@ Purr. {Vibrate, sound. `State.春++` in state}
 3.[Go outside].
 
 
-Lobby location.
+Lobby 1
+-------
 
 You're in the lobby. You hear soft rumble of engines, which carries you and
 your parents long before you came through the darkness of the universe.
@@ -129,45 +137,141 @@ Thin red lines along the walls will bring you to medcentre.
 
 1.1.[Go upward.]
 
-// to the upwards lobby
+{GOTO: Near captain's cabin}
 
 1.2.[Go to the medroom.]
 
-// to the medroom
+{GOTO: Medroom}
 
-{just once}
-1.3.[Stand still and listen to engines rumble.]
+{once}
+    1.3.[Stand still and listen to engines rumble.]
 
-G-r-r-r. You always loved the sound of engines. Pretty much as anyone on the
-ship.
+    G-r-r-r. You always loved the sound of engines. Pretty much as anyone on the
+    ship.
 
-1.* choices except 1.3.
-1.3.1.[Sit on the floor and listen.]
+    1.* choices except 1.3.
+    1.3.1.[Sit on the floor and listen.]
 
-You almost immerse in tender voice of engines. The tone is very low and deep.
-It covers you like silk blanket. You feel floor vibrating in almost negligible
-jolts with entraining repetitive pattern.
+    You almost immerse in tender voice of engines. The tone is very low and deep.
+    It covers you like silk blanket. You feel floor vibrating in almost negligible
+    jolts with entraining repetitive pattern.
 
-{only if `State.春 >= 1`}
-You see 春 is coming to you.
+    {if `State.春 >= 1`}
+        You see 春 is coming to you.
 
-1.3.1.1.[Ignore 春 and pay attention to vibrating pattern on the floor.]
-You feel anxiety. You always loved engines and how they sound. You're getting
-uncomfortable.
+        1.3.1.1.[Ignore 春 and pay attention to vibrating pattern on the floor.]
+        You feel anxiety. You always loved engines and how they sound. You're getting
+        uncomfortable.
 
-{`State.Anxiety++`}
+        {`State.Anxiety++`}
 
-1.3.2.[Let 春 on your knees.]
+        1.3.2.[Let 春 on your knees.]
 
-{Vibrate. `State.春++`}
-{/if}
-{/end}
+        {Vibrate. `State.春++`}
+    {/if}
+{/once}
 
-1.4.[Listen to the distant voices.]
+{once}
+    1.4.[Go to the toilet near the lobby entrance.]
 
-Distance laugh. You don't remember when you hear that last time.
+    You made it. It was hard successive work. You look at what you've done.
+    Now you believe the monster wasn't so scary.
+    {`State.Anxiety--`}
+{/once}
 
+1.5.[Listen to the distant voices.]
+
+Distant laugh. You don't remember when you heard that last time.
 {`State.Interest++`}
+
+// {once}
+//     1.6.
+//     Captain: inspired. We're approaching something significant.
+//     We're approaching something significant. You'll be the first to know.
+// {/once}
+//
+// 1.7.
+// Crying woman: it was so good on Earth. Sunset and autumn' colours.
+// You answer your cat's name is 春. You barely understand her.
+
+
+Near captain's cabin 1
+----------------------
+
+// You see lots of people fussing around.
+// No one stops to talk with you.
+// Every second somebody goes in on out the cabin.
+//
+// Directions: {Lobby}.
+
+
+Medroom 1
+---------
+
+// Mother: works hard, not really interested in talking.
+// You say about monster. Almost nothing in reply.
+// You say about crying woman. Still nothing.
+// You say you've seen captain. Nobody's home.
+//
+// Directions: {Lobby}.
+
+
+Dining room 1
+--------------
+
+// Cook gives you some 
+//
+// Directions: {Lobby}.
+
+
+
+Stage 2
+=======
+
+Family bunk 2
+--------------
+Lobby 2
+-------
+Near captain's cabin 2
+----------------------
+Medroom 2
+---------
+Dining room 2
+-------------
+
+
+Stage 3
+=======
+
+Family bunk 3
+--------------
+Lobby 3
+-------
+Near captain's cabin 3
+----------------------
+Medroom 3
+---------
+Dining room 3
+-------------
+
+
+Stage 4
+=======
+
+Family bunk 4
+--------------
+Lobby 4
+-------
+Near captain's cabin 4
+----------------------
+Medroom 4
+---------
+Dining room 4
+-------------
+
+
+High level logical stages
+=========================
 
 Stage 1. Dark object appeared far on the ship's way.
 Stage 2. Dark object is being slightly touched by spectroanalysis.
