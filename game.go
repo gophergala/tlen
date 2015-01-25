@@ -50,12 +50,8 @@ func (game *Game) SetLayoutName(layoutName string) {
 	game.state.LayoutName = layoutName
 }
 
-func (game *Game) RestoreMainLayout() {
-	game.SetLayoutName("main_layout")
-	game.SwitchLayout()
-}
-
 func (game *Game) SwitchLayout() {
+	log.Printf("%#v", game.state.LayoutName)
 	android.ChangeLayout(game.state.LayoutName)
 }
 

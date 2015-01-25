@@ -51,6 +51,10 @@ func initLocations() map[string]Location {
 		OriginLocation: locations["bunk"],
 	}
 
+	locations["locked"] = &LockedSubgame{
+		GlobalLocations: locations,
+	}
+
 	locations["wakeup_father_subgame"] = &WakeUpFatherSubgame{
 		NextLocation: &JumpLocation{
 			Jump: locations["bunk"],
@@ -69,6 +73,7 @@ func initLocations() map[string]Location {
 	locations["lobby"].Link(locations["din"])
 	locations["lobby"].Link(locations["med"])
 	locations["lobby"].Link(locations["cap"])
+	locations["lobby"].Link(locations["locked"])
 
 	locations["med"].Link(locations["mother1"])
 	locations["med"].Link(locations["captain1"])
@@ -106,7 +111,7 @@ func start() {
 	locations := initLocations()
 
 	game := NewGame(&State{})
-	game.SetLocation(locations["monster"])
+	game.SetLocation(locations["lobby"])
 	game.SetLayoutName("main_layout")
 	game.Start()
 }
