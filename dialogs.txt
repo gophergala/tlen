@@ -233,6 +233,31 @@ Distant laugh. You can't remember the last time you've heard it.
 {/once}
 
 1.7.[Go to crying woman.]
+
+Woman looks lost in her thoughts. You look closely and see she isn't
+actually crying. She smiles with hardly perceptable smile, but her eyes
+are full of tears. Woman shows strange mix of despair and happiness.
+
+"... Yes, we worked hard all our lives. No, it won't be easy. We're not
+as young as... 45 years? Yes, 45 years ago. Cryogenic chambers... Yes,
+it helps, but we're getting older anyway..."
+
+Woman rises her head and starts speaking to you.
+
+"Do you know about sunset?"
+
+1.7.1.[Yes, I've heard something from my teachers...]
+
+Woman:
+"Teachers... Not all of them remember what it is. But they must teach...
+But what else we can do. We ..."
+
+1.7.2.[I never saw it. But I believe it's beautiful.]
+
+1.7.2.[Leave her alone.]
+
+Woman continued to talk with herself.
+
 // Crying woman: it was so good on Earth. Sunset and autumn' colours.
 // You answer your cat's name is 春. You barely understand her.
 
