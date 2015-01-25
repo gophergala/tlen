@@ -14,16 +14,18 @@ const (
 )
 
 var locations = map[string]Location{
-	"home":    NewTestLocation("home", "home desc"),
-	"kitchen": NewTestLocation("kitchen", "kitchen desc"),
-	"outside": NewTestLocation("outside", "outside desc"),
-	"shop":    NewTestLocation("shop", "shop desc"),
+	"home":        NewTestLocation("home", "home desc"),
+	"kitchen":     NewTestLocation("kitchen", "kitchen desc"),
+	"outside":     NewTestLocation("outside", "outside desc"),
+	"shop":        NewTestLocation("shop", "shop desc"),
+	"family_bunk": NewTestLocation("family bunk", "just another bunkroom"),
 }
 
 var actions = map[string]Action{
-	"boxes":        &BoxesAction{},
-	"monster":      &MonsterAction{},
-	"father_dream": &FatherDreamAction{},
+	"boxes":                 &BoxesAction{},
+	"monster":               &MonsterAction{},
+	"father_dream":          &FatherDreamAction{},
+	"stage_1_family_bunk_1": &StageOneFamilyBunkOne{},
 }
 
 func init() {
@@ -42,6 +44,9 @@ func init() {
 	locations["kitchen"].LinkAction(actions["boxes"])
 	locations["kitchen"].LinkAction(actions["monster"])
 	locations["kitchen"].LinkAction(actions["father_dream"])
+
+	// Story started here
+	locations["family_bunk"].LinkAction(actions["stage_1_family_bunk_1"])
 }
 
 var game *Game
@@ -53,8 +58,8 @@ func start() {
 	//origin := Locations["game_room"]
 	//origin.Draw()
 	game = &Game{}
-	game.SetLocation(locations["home"])
-	game.SetCurrentStage(0)
+	game.SetLocation(locations["family_bunk"])
+	game.SetCurrentStage(1)
 	game.Start()
 }
 
