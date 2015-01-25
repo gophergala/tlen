@@ -20,6 +20,7 @@ func (action MonsterAction) Run() {
 			//Description: `Father takes your away from Imaginarium and locks the door on magnet lock.`,
 			PreDraw: func(scenario *Scenario) bool {
 				scenario.Description = "Father takes your away from Imaginarium and locks the door on <b>magnet lock</b>."
+				game.SetCurrentStage(1)
 				scenario.Draw()
 				return false
 			},

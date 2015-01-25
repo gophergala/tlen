@@ -21,8 +21,8 @@ var locations = map[string]Location{
 }
 
 var actions = map[string]Action{
-	"boxes":   &BoxesAction{},
-	"monster": &MonsterAction{},
+	"boxes":        &BoxesAction{},
+	"monster":      &MonsterAction{},
 	"father_dream": &FatherDreamAction{},
 }
 
@@ -54,6 +54,7 @@ func start() {
 	//origin.Draw()
 	game = &Game{}
 	game.SetLocation(locations["home"])
+	game.SetCurrentStage(0)
 	game.Start()
 }
 

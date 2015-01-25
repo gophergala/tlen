@@ -9,10 +9,12 @@ import (
 )
 
 type State struct {
-	Location   Location
-	Action     Action
-	LayoutId   string
-	LayoutName string
+	Location     Location
+	Action       Action
+	LayoutId     string
+	LayoutName   string
+	MoveCounter  int
+	CurrentStage int
 }
 
 type Game struct {
@@ -25,6 +27,16 @@ type Game struct {
 
 	LocationOnClickHandler GameLocationOnClickHandler
 	ActionOnClickHandler   GameActionOnClickHandler
+}
+
+func (game *Game) IncrementMoveCounter() {
+	game.state.MoveCounter += 1
+	log.Printf("!!! current game MOVE is  %#v\n", game.state.MoveCounter)
+}
+
+func (game *Game) SetCurrentStage(stage int) {
+	log.Printf("!!! current game STAGE is  %#v\n", stage)
+	game.state.CurrentStage = stage
 }
 
 func (game *Game) SetLocation(location Location) {
@@ -136,6 +148,7 @@ func (game *Game) SetLocationArterfactsVisibility(should bool) {
 }
 
 func (game *Game) LocationOnClick(button sdk.Button, location Location) {
+	game.IncrementMoveCounter()
 	game.SetLocation(location)
 	game.SwitchLocation()
 }
