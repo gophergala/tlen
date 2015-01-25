@@ -249,17 +249,32 @@ Woman rises her head and starts speaking to you.
 1.7.1.[Yes, I've heard something from my teachers...]
 
 Woman:
-"Teachers... Not all of them remember what it is. But they must teach...
-But what else we can do. We ..."
+"Teachers... Not all of them remember what is sunrise. But they must teach...
+But what else we can do... You'll help us. You'll see a lot of beautiful
+sunrises."
 
 1.7.2.[I never saw it. But I believe it's beautiful.]
 
-1.7.2.[Leave her alone.]
+Woman:
+"Oh, dear. I never thought it was so important. I always knew my purpose.
+This feeling, when you wake up and you know exactly what you should do.
+You work hard to achieve something. And finally you got what you want.
+
+But there comes a time when you stop looking into the future. You think
+of who are you now, what is your pleasure in life...
+
+Oh, sunshine... When I started to prepare to the Expedition, I forgot
+about the world I live. It simply disappeared for me. I believe I was
+right about my decision. The Earth was beautiful. But we were strong
+enough. We worked hard all our lives to get here..."
+
+Woman nodded and continued to talk to herself.
+
+1.7.1.1.[Leave her alone.]
+
+1.7.3.[Leave her alone.]
 
 Woman continued to talk with herself.
-
-// Crying woman: it was so good on Earth. Sunset and autumn' colours.
-// You answer your cat's name is 春. You barely understand her.
 
 {Directions}
     Family bunk
@@ -270,7 +285,10 @@ Woman continued to talk with herself.
 {/Directions}
 
 {Transition}
-    // Short briefing on intercom about discovered planet. "Details later".
+    Intercom message:
+    "Dear citizens. I have a great news about space object approaching.
+    Our research shown it is a planet. I'll return with more details
+    as soon as I get anything from our researchers."
 {/Transition}
 
 
