@@ -54,6 +54,8 @@ func start() {
 }
 
 func main() {
+	defer android.PanicHandler()
+
 	android.OnStart(start)
 	android.Enter()
 }

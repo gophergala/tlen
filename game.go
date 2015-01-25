@@ -57,15 +57,19 @@ func (game *Game) Start() {
 
 	game.descView = android.GetViewById("desc_text").(sdk.TextView)
 
+	game.viewObjects = make(map[string][]sdk.View)
+
 	game.SwitchLocation()
 }
 
 func (game *Game) ClearViews() {
 	for _, view := range game.viewObjects[game.state.LayoutName] {
-		view.SetVisibility(ViewGone)
+		log.Printf("game.go:68 %#v", view)
+		log.Printf("game.go:68 %#v", game.state.LayoutId)
+		android.RemoveView(view, game.state.LayoutId)
 	}
 
-	game.viewObjects = make(map[string][]sdk.View, 0)
+	game.viewObjects[game.state.LayoutName] = []sdk.View{}
 }
 
 func (game *Game) SwitchLocation() {
@@ -144,5 +148,7 @@ func (game *Game) CreateView(viewName string) interface{} {
 func (game *Game) AttachView(view sdk.View) {
 	game.viewObjects[game.state.LayoutName] = append(
 		game.viewObjects[game.state.LayoutName], view)
+	log.Printf("game.go:152 %#v", view)
+	log.Printf("game.go:152 %#v", game.state.LayoutId)
 	android.AttachView(view, game.state.LayoutId)
 }
