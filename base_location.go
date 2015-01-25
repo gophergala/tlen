@@ -1,20 +1,23 @@
 package main
 
 type Location interface {
+	GetButtonTitle() string
 	GetHeader() string
 	GetDescription() string
-	LinkLocation(Location)
-	LinkAction(Action)
+	Link(Location)
 	GetLinkedLocations() []Location
-	GetLinkedActions() []Action
+	Enter(*State)
 }
 
 type BaseLocation struct {
+	Header          string
+	ButtonTitle     string
+	Description     string
 	LinkedLocations []Location
 	LinkedActions   []Action
 }
 
-func (location *BaseLocation) LinkLocation(nextLocation Location) {
+func (location *BaseLocation) Link(nextLocation Location) {
 	location.LinkedLocations = append(location.LinkedLocations, nextLocation)
 }
 
@@ -28,4 +31,20 @@ func (location *BaseLocation) LinkAction(nextAction Action) {
 
 func (location *BaseLocation) GetLinkedActions() []Action {
 	return location.LinkedActions
+}
+
+func (location *BaseLocation) GetButtonTitle() string {
+	return location.ButtonTitle
+}
+
+func (location *BaseLocation) GetHeader() string {
+	return location.Header
+}
+
+func (location *BaseLocation) GetDescription() string {
+	return location.Description
+}
+
+func (location *BaseLocation) Enter(*State) {
+	// noop
 }

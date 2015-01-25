@@ -13,58 +13,33 @@ const (
 	ViewGone      = 8
 )
 
-var locations = map[string]Location{
-	"home":        NewTestLocation("home", "home desc"),
-	"kitchen":     NewTestLocation("kitchen", "kitchen desc"),
-	"outside":     NewTestLocation("outside", "outside desc"),
-	"shop":        NewTestLocation("shop", "shop desc"),
-	"family_bunk": &FamilyBunkLocation{},
-}
-
-var actions = map[string]Action{
-	"boxes":        &BoxesAction{},
-	"monster":      &MonsterAction{},
-	"father_dream": &FatherDreamAction{},
-
-	"stage_1_family_bunk_1": &FamilyBunkAction{},
-	//"stage_1_caress_cat":    &StageOneCaressCat{},
-
-	"hagrid": &HagridAction{},
+var globalLocations = map[string]Location{
+	"home":    NewTestLocation("home", "home desc"),
+	"kitchen": NewTestLocation("kitchen", "kitchen desc"),
+	"outside": NewTestLocation("outside", "outside desc"),
+	"shop":    NewTestLocation("shop", "shop desc"),
+	"monster": &MonsterSubgame{},
 }
 
 func init() {
-	locations["home"].LinkLocation(locations["kitchen"])
-	locations["home"].LinkLocation(locations["outside"])
+	globalLocations["home"].Link(globalLocations["kitchen"])
+	globalLocations["home"].Link(globalLocations["outside"])
 
-	locations["kitchen"].LinkLocation(locations["home"])
+	globalLocations["kitchen"].Link(globalLocations["home"])
 
-	locations["outside"].LinkLocation(locations["shop"])
-	locations["outside"].LinkLocation(locations["home"])
-	locations["outside"].LinkLocation(locations["kitchen"])
+	globalLocations["outside"].Link(globalLocations["shop"])
+	globalLocations["outside"].Link(globalLocations["home"])
+	globalLocations["outside"].Link(globalLocations["kitchen"])
 
-	locations["shop"].LinkLocation(locations["outside"])
+	globalLocations["shop"].Link(globalLocations["outside"])
 
-	// DANGEROUS
-	locations["kitchen"].LinkAction(actions["boxes"])
-	locations["kitchen"].LinkAction(actions["monster"])
-	locations["kitchen"].LinkAction(actions["father_dream"])
-	locations["kitchen"].LinkAction(actions["hagrid"])
-
-	// Story started here
-	locations["family_bunk"].LinkAction(actions["stage_1_family_bunk_1"])
+	globalLocations["home"].Link(globalLocations["monster"])
 }
 
-var game *Game
-
 func start() {
-	//locationButtons = []sdk.Button{}
-	//actionButtons = []sdk.Button{}
-
-	//origin := Locations["game_room"]
-	//origin.Draw()
-	game = &Game{}
-	game.SetLocation(locations["kitchen"])
-	game.SetCurrentStage(1)
+	game := NewGame(&State{})
+	game.SetLocation(globalLocations["kitchen"])
+	game.SetLayoutName("main_layout")
 	game.Start()
 }
 

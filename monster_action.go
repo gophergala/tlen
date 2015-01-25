@@ -1,153 +1,153 @@
 package main
 
-type MonsterAction struct{}
+import "github.com/seletskiy/go-android-rpc/android"
 
-func (action MonsterAction) GetButtonTitle() string {
+type MonsterSubgame struct {
+	Subgame
+}
+
+func (subgame MonsterSubgame) GetButtonTitle() string {
 	return "Monster Title"
 }
 
-func (action MonsterAction) GetLayoutName() string {
+func (subgame MonsterSubgame) GetLayoutName() string {
 	return "main_layout"
 }
 
-var rootScenario = Scenario{}
+func (subgame MonsterSubgame) Enter(state *State) {
+	defer android.PanicHandler()
 
-func (action MonsterAction) Run() {
+	subgame.Subgame.Enter(state)
 
-	answerEleven := Scenarios{
-		&Scenario{
-			Title: `End`,
-			//Description: `Father takes your away from Imaginarium and locks the door on magnet lock.`,
-			PreDraw: func(scenario *Scenario) bool {
-				scenario.Description = "Father takes your away from Imaginarium and locks the door on <b>magnet lock</b>."
-				game.SetCurrentStage(1)
-				scenario.Draw()
-				return false
-			},
+	monsterQuestion := `<p>"Alive? Energy? Energy."</p>
+<p>You start to feel yourself more clearly.</p>
+<p>Start to feel something around you. And you realize the something is alive.</p>
+<p>You don't need another eternity to understand that the something is deadly strange, deadly dark and deadly dangerous. You feel it doesn't even know who are you, but even more you know it want you not to be.</p>`
+
+	locations := map[string]Location{
+		"1": &BaseLocation{
+			Description: `<p><b>It is pitch black.</b></p>
+			<p>You try to make a move to escape, but barely feel your body.</p>
+			<p>Just powerful clammy darkness and strange feeling of existence and non-existence at the same time.</p>`,
 		},
-	}
 
-	answerTen := Scenarios{
-		&Scenario{
-			Title: `"Are we <b>home</b>?"`,
-			Description: `<p>"Not yet. But it looks like we are so close".</p>
-<p>Grin touches your father's lips.</p>`,
-			Answers: answerEleven,
+		"2": &BaseLocation{
+			ButtonTitle: "Try to move",
+			Description: `<p>You feel different. Time goes different.</p><p>You feel your mind wandering.</p>`,
 		},
-	}
 
-	answerNine := Scenarios{
-		&Scenario{
-			Title:       `"I feel pain!"`,
-			Description: `<p>"You'd better see your mom. She's our lovely doctor."</p>`,
-			Answers:     answerTen,
+		"3": &BaseLocation{
+			ButtonTitle: `"Who are you?"`,
+			Description: `<p>"You? Things? Cold. Solid. Energy. Dark."</p>`,
 		},
-	}
 
-	answerEight := Scenarios{
-		&Scenario{
-			Title:       `I've fought with a monster!`,
-			Description: `<p>Your father puts you on your feet.</p>`,
-			Answers:     answerNine,
+		"4.1": &BaseLocation{
+			ButtonTitle: "Play.",
+			Description: monsterQuestion,
 		},
-	}
 
-	answerSeven := Scenarios{
-		&Scenario{
-			Title: "Cry",
-			Description: `<p>Your father is looking at you inquiringly.</p>
-<p>"It's a just bad dream.", he says.</p>`,
-			Answers: answerEight,
+		"4.2": &BaseLocation{
+			ButtonTitle: "Toys.",
+			Description: monsterQuestion,
 		},
-	}
 
-	answerSix := Scenarios{
-		&Scenario{
-			Title: "Anger",
+		"4.3": &BaseLocation{
+			ButtonTitle: "Mother.",
+			Description: monsterQuestion,
+		},
+
+		"4.4": &BaseLocation{
+			ButtonTitle: "Father.",
+			Description: monsterQuestion,
+		},
+
+		"5": &BaseLocation{
+			ButtonTitle: "Run away",
+			Description: "<p>It is pitch black. There is nowhere to run.</p>",
+		},
+
+		"6.1": &BaseLocation{
+			ButtonTitle: "Anger",
+			Description: "<p>You feel dark presence goes away.</p>",
+		},
+
+		"6.2": &BaseLocation{
+			ButtonTitle: "Panic",
+			Description: `<p>You feel <font color="red">pain</font>.</p>`,
+		},
+
+		"7": &BaseLocation{
+			ButtonTitle: "Anger",
 			Description: `<p>You feel dark presence goes away.</p>
 <p>You suddenly became aware of your body.</p>
 <p>Rumbling around you. Low and pleasant rumbling. G-r-r-r-r. Like a tiger. Like a... an engines. Ginormous photon engines.</p>
 <p>You're waking up.</p>
 <p>You're seing you father. You're feeling bright <font color="red">pain</font>.</p>`,
-			Answers: answerSeven,
+		},
+
+		"8": &BaseLocation{
+			ButtonTitle: "Cry",
+			Description: `<p>Your father is looking at you inquiringly.</p>
+<p>"It's a just bad dream.", he says.</p>`,
+		},
+
+		"9": &BaseLocation{
+			ButtonTitle: `I've fought with a monster!`,
+			Description: `<p>Your father puts you on your feet.</p>`,
+		},
+
+		"10": &BaseLocation{
+			ButtonTitle: `"I feel pain!"`,
+			Description: `<p>"You'd better see your mom. She's our lovely doctor."</p>`,
+		},
+
+		"11": &BaseLocation{
+			ButtonTitle: `"Are we <b>home</b>?"`,
+			Description: `<p>"Not yet. But it looks like we are so close".</p>
+<p>Grin touches your father's lips.</p>`,
+		},
+
+		"12": &BaseLocation{
+			ButtonTitle: `End`,
+			Description: `<p>Father takes your away from Imaginarium and locks the door on <b>magnet lock.</b></p>`,
 		},
 	}
 
-	answerFive := Scenarios{
-		&Scenario{
-			Title:       "Panic",
-			Description: `<p>You feel <font color="red">pain</font>.</p>`,
-			Answers:     answerSix,
-		},
-	}
+	locations["1"].Link(locations["2"])
 
-	answerFour := Scenarios{
-		&Scenario{
-			Title:       "Anger",
-			Description: "<p>You feel dark presence goes away.</p>",
-			Answers:     answerFive,
-		},
-	}
+	locations["2"].Link(locations["3"])
 
-	answersThreeDescription := `<p>"Alive? Energy? Energy."</p>
-<p>You start to feel yourself more clearly.</p>
-<p>Start to feel something around you. And you realize the something is alive.</p>
-<p>You don't need another eternity to understand that the something is deadly strange, deadly dark and deadly dangerous. You feel it doesn't even know who are you, but even more you know it want you not to be.</p>`
+	locations["3"].Link(locations["4.1"])
+	locations["3"].Link(locations["4.2"])
+	locations["3"].Link(locations["4.3"])
+	locations["3"].Link(locations["4.4"])
 
-	answersThreeScenarios := Scenarios{
-		&Scenario{
-			Title:       "Run away",
-			Description: "<p>It is pitch black. There is nowhere to run.</p>",
-			Answers:     answerFour,
-		},
-	}
+	locations["4.1"].Link(locations["5"])
+	locations["4.2"].Link(locations["5"])
+	locations["4.3"].Link(locations["5"])
+	locations["4.4"].Link(locations["5"])
+	locations["4.4"].Link(locations["5"])
 
-	answersThree := Scenarios{
-		&Scenario{
-			Title:       "Play.",
-			Description: answersThreeDescription,
-			Answers:     answersThreeScenarios,
-		},
-		&Scenario{
-			Title:       "Toys.",
-			Description: answersThreeDescription,
-			Answers:     answersThreeScenarios,
-		},
-		&Scenario{
-			Title:       "Mother.",
-			Description: answersThreeDescription,
-			Answers:     answersThreeScenarios,
-		},
-		&Scenario{
-			Title:       "Father.",
-			Description: answersThreeDescription,
-			Answers:     answersThreeScenarios,
-		},
-	}
+	locations["5"].Link(locations["6.1"])
+	locations["5"].Link(locations["6.2"])
 
-	answerTwo := Scenarios{
-		&Scenario{
-			Title:       `"Who are you?"`,
-			Description: `<p>"You? Things? Cold. Solid. Energy. Dark."</p>`,
-			Answers:     answersThree,
-		},
-	}
+	locations["6.1"].Link(locations["7"])
+	locations["6.2"].Link(locations["7"])
 
-	answerOne := Scenarios{
-		&Scenario{
-			Title:       "Try to move",
-			Description: `<p>You feel different. Time goes different.</p><p>You feel your mind wandering.</p>`,
-			Answers:     answerTwo,
-		},
-	}
+	locations["7"].Link(locations["8"])
 
-	monsterScenario := &Scenario{
-		Title: "Monster scenario",
-		Description: `<p><b>It is pitch black.</b></p>
-<p>You try to make a move to escape, but barely feel your body.</p>
-<p>Just powerful clammy darkness and strange feeling of existence and non-existence at the same time.</p>`,
-		Answers: answerOne,
-	}
+	locations["8"].Link(locations["9"])
 
-	monsterScenario.Draw()
+	locations["9"].Link(locations["10"])
+
+	locations["10"].Link(locations["11"])
+
+	locations["11"].Link(locations["12"])
+
+	locations["12"].Link(globalLocations["kitchen"])
+
+	subgame.SetLayoutName("main_layout")
+	subgame.SetLocation(locations["1"])
+
+	subgame.Start()
 }
