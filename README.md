@@ -1,3 +1,5 @@
+### Gif that has been taken from real device
+
 ![total](https://cloud.githubusercontent.com/assets/674812/5894085/e44ccd72-a51c-11e4-862e-7739d4b9857c.gif)
 
 ## What's Up, Doc?
