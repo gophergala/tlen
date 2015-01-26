@@ -82,7 +82,7 @@ func (subgame Cook1Subgame) Enter(state *State) {
 
 	locations["5"].Link(locations["6"])
 
-	locations["6"].Link(subgame.GlobalLocations["bunk"])
+	locations["6"].Link(subgame.GlobalLocations["github"])
 
 	subgame.SetLayoutName("main_layout")
 	subgame.SetLocation(locations["1"])

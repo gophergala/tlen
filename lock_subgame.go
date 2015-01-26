@@ -14,7 +14,7 @@ type LockedSubgame struct {
 }
 
 func (subgame LockedSubgame) GetButtonTitle() string {
-	return "Locked Title"
+	return "Captain cabinet (digital lock)"
 }
 
 func (subgame LockedSubgame) GetLayoutName() string {
@@ -28,8 +28,10 @@ func (subgame LockedSubgame) Enter(state *State) {
 
 	locations := map[string]Location{
 		"1": &AwaitLockedLocation{
-			BaseLocation: BaseLocation{Description: "DESC"},
-			Subgame:      &subgame,
+			BaseLocation: BaseLocation{
+				Description: "DESC",
+			},
+			Subgame: &subgame,
 		},
 	}
 

@@ -146,6 +146,7 @@ type FinalWakeUpLocation struct {
 func (location FinalWakeUpLocation) Enter(state *State) {
 	log.Printf("%#v", "final wake up locatin")
 	location.game.SetLocation(location.game.NextLocation)
+	location.game.SwitchLocation()
 }
 
 func (location *AwaitWakeUpLocation) OnChange(values []float64) {
