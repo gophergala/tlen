@@ -17,18 +17,25 @@ const Cat = `<font color="green">春</font>`
 
 func initLocations() map[string]Location {
 	locations := make(map[string]Location)
-	locations["bunk"] = &BaseLocation{
-		ButtonTitle: "Go to bunk",
-		Header:      "<p>It's yours family bunk.</p>",
-		Description: "<p>You see " + Cat + ".</p>" +
-			"<p>You see your dad watching TV.</p>" +
+
+	githubMessage := `Visit our github repo to get the latest version
+		http://github.com/seletskiy/tlen`
+
+	locations["github"] = NewTestLocation("In development", githubMessage)
+
+	locations["bunk"] = NewTestLocation(
+		"Go to bunk",
+		"<p>It's yours family bunk.</p>"+
+			"<p>You see "+Cat+".</p>"+
+			"<p>You see your dad watching TV.</p>"+
 			"<p>There are door to ship lobby.</p>",
 	}
 
 	locations["lobby"] = NewTestLocation("Go to lobby", "You enter the lobby")
 	locations["din"] = NewTestLocation("Go to dinnary", "Dinnay")
 	locations["med"] = NewTestLocation("Go to medical", "Medical cabinet")
-	locations["cap"] = NewTestLocation("Go to captain room", "Captain's room")
+	locations["cap"] = NewTestLocation("Go to captain room", githubMessage)
+	// "Captain's room")
 
 	locations["stub"] = &StubSubgame{
 		GlobalLocations: locations,
@@ -64,33 +71,30 @@ func initLocations() map[string]Location {
 
 	locations["wakeup_father_subgame"] = &WakeUpFatherSubgame{
 		NextLocation: locations["bunk"],
+		NextLocation: locations["github"],
 	}
 
 	locations["bunk"].Link(locations["caress_cat"])
 	locations["bunk"].Link(locations["wakeup_father_subgame"])
 	locations["bunk"].Link(locations["lobby"])
 
-	locations["lobby"].Link(
-		&Stage1ProxyLocation{
-			OldWay: locations["woman1"],
-			NewWay: locations["caress_cat"],
-		},
-	)
-
 	locations["lobby"].Link(locations["bunk"])
-	locations["lobby"].Link(locations["din"])
-	locations["lobby"].Link(locations["med"])
-	locations["lobby"].Link(locations["cap"])
+	//locations["lobby"].Link(locations["din"])
+	//locations["lobby"].Link(locations["med"])
 	locations["lobby"].Link(locations["locked"])
 
-	locations["med"].Link(locations["mother1"])
-	locations["med"].Link(locations["captain1"])
-	locations["med"].Link(locations["lobby"])
+	//locations["med"].Link(locations["mother1"])
+	//locations["med"].Link(locations["captain1"])
+	//locations["med"].Link(locations["lobby"])
 
 	//locations["din"].Link(actions["cook1"])
-	locations["din"].Link(locations["lobby"])
+	//locations["din"].Link(locations["lobby"])
 
+	locations["locked"].Link(locations["cap"])
 	locations["cap"].Link(locations["lobby"])
+
+	// go to lobby, if not to github
+	locations["github"].Link(locations["lobby"])
 
 	//locations["bunk"].Link(locations["father2"])
 
@@ -119,7 +123,7 @@ func start() {
 	locations := initLocations()
 
 	game := NewGame(&State{})
-	game.SetLocation(locations["lobby"])
+	game.SetLocation(locations["monster"])
 	game.SetLayoutName("main_layout")
 	game.Start()
 }

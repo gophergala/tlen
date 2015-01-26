@@ -36,4 +36,4 @@ But we hope you will enjoy it.
 ## Latest version
 
 Please, follow the link to get the latest version of the game:
-https://github.com/seletskiy/.
+https://github.com/seletskiy/tlen/.
