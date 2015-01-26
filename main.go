@@ -17,13 +17,13 @@ const Cat = `<font color="green">春</font>`
 
 func initLocations() map[string]Location {
 	locations := make(map[string]Location)
-	locations["bunk"] = NewTestLocation(
-		"Go to bunk",
-		"<p>It's yours family bunk.</p>"+
-			"<p>You see "+Cat+".</p>"+
-			"<p>You see your dad watching TV.</p>"+
+	locations["bunk"] = &BaseLocation{
+		ButtonTitle: "Go to bunk",
+		Header:      "<p>It's yours family bunk.</p>",
+		Description: "<p>You see " + Cat + ".</p>" +
+			"<p>You see your dad watching TV.</p>" +
 			"<p>There are door to ship lobby.</p>",
-	)
+	}
 
 	locations["lobby"] = NewTestLocation("Go to lobby", "You enter the lobby")
 	locations["din"] = NewTestLocation("Go to dinnary", "Dinnay")
@@ -63,12 +63,7 @@ func initLocations() map[string]Location {
 	}
 
 	locations["wakeup_father_subgame"] = &WakeUpFatherSubgame{
-		NextLocation: &JumpLocation{
-			Jump: locations["bunk"],
-			BaseLocation: BaseLocation{
-				ButtonTitle: "Wake up",
-			},
-		},
+		NextLocation: locations["bunk"],
 	}
 
 	locations["bunk"].Link(locations["caress_cat"])

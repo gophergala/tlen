@@ -50,11 +50,11 @@ type CaressCatLocation struct {
 }
 
 func (location CaressCatLocation) GetDescription() string {
-	return "<p>You see " + Cat + ".</p>"
+	return "<p>" + Cat + " is looking at you.</p>"
 }
 
 func (location CaressCatLocation) GetHeader() string {
-	return "<p>Your family bunk.</p>"
+	return "<p>You sit down near the cat.</p>"
 }
 
 func (location CaressCatLocation) Enter(state *State) {
