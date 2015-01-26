@@ -94,7 +94,7 @@ func initLocations() map[string]Location {
 
 	// go to lobby, if not to github
 	locations["github"].Link(locations["lobby"])
-	locations["wakeup_father_subgame"].Link(locations["github"])
+	//locations["wakeup_father_subgame"].Link(locations["github"])
 	locations["lobby"].Link(locations["github"])
 	//locations["bunk"].Link(locations["father2"])
 

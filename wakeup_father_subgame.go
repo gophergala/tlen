@@ -77,8 +77,8 @@ func (subgame WakeUpFatherSubgame) Enter(state *State) {
 	locations["2"].Link(locations["3.1"])
 	locations["2"].Link(locations["3.2"])
 
-	locations["3.1"].Link(subgame.NextLocation)
-	locations["3.2"].Link(subgame.NextLocation)
+	locations["3.1"].Link(locations["4"])
+	locations["3.2"].Link(locations["4"])
 
 	locations["4"].Link(subgame.NextLocation)
 	//locations["4"].Link(locations["5.2"])
