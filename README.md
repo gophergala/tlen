@@ -32,3 +32,8 @@ spaceship settlers, that are traveling for 45 years to their new home.
 App can crash here and there, and we are not so good plot writers.
 
 But we hope you will enjoy it.
+
+## Latest version
+
+Please, follow the link to get the latest version of the game:
+https://github.com/seletskiy/.
