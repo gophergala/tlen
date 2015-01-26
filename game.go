@@ -81,7 +81,7 @@ func (game *Game) SwitchLocation() {
 	android.SetTextFromHtml(game.headerView, location.GetHeader())
 	android.SetTextFromHtml(game.descView, location.GetDescription())
 
-	game.SetLocationArterfactsVisibility(true)
+	//game.SetLocationArterfactsVisibility(true)
 
 	linkedLocations := location.GetLinkedLocations()
 	for _, linkedLocation := range linkedLocations {

@@ -75,7 +75,13 @@ func initLocations() map[string]Location {
 	locations["bunk"].Link(locations["wakeup_father_subgame"])
 	locations["bunk"].Link(locations["lobby"])
 
-	locations["lobby"].Link(locations["woman1"])
+	locations["lobby"].Link(
+		&Stage1ProxyLocation{
+			OldWay: locations["woman1"],
+			NewWay: locations["caress_cat"],
+		},
+	)
+
 	locations["lobby"].Link(locations["bunk"])
 	locations["lobby"].Link(locations["din"])
 	locations["lobby"].Link(locations["med"])
