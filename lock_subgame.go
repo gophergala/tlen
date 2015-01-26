@@ -24,10 +24,8 @@ func (subgame LockedSubgame) GetLayoutName() string {
 func (subgame LockedSubgame) Enter(state *State) {
 	defer android.PanicHandler()
 
-	log.Printf("%#v", 1)
 	subgame.Subgame.Enter(state)
 
-	log.Printf("%#v", 2)
 	locations := map[string]Location{
 		"1": &AwaitLockedLocation{
 			BaseLocation: BaseLocation{Description: "DESC"},
@@ -36,14 +34,10 @@ func (subgame LockedSubgame) Enter(state *State) {
 	}
 
 	subgame.SetLayoutName("locked_layout")
-	log.Printf("%#v", 3)
 	subgame.SwitchLayout()
-	log.Printf("%#v", 4)
 	subgame.SetLocation(locations["1"])
 
-	log.Printf("%#v", 5)
 	subgame.Start()
-	log.Printf("%#v", 6)
 }
 
 type AwaitLockedLocation struct {
@@ -75,7 +69,7 @@ func (location AwaitLockedLocation) Enter(state *State) {
 			2, 3, 4, 7,
 		},
 		2: []int{
-			1, 3, 5, 6,
+			1, 3, 5, 8,
 		},
 		3: []int{
 			1, 2, 6, 9,
@@ -126,11 +120,11 @@ func (handler AwaitLockedLocationHandler) OnClick() {
 func (location AwaitLockedLocation) OnClick(index int) {
 	defer android.PanicHandler()
 	location.States[index] = !location.States[index]
-	value := location.States[index]
 
 	for _, otherIndex := range location.Relations[index] {
-		location.Buttons[otherIndex].SetChecked(value)
-		location.States[otherIndex] = value
+		state := !location.States[otherIndex]
+		location.Buttons[otherIndex].SetChecked(state)
+		location.States[otherIndex] = state
 	}
 
 	log.Printf("%#v", location.States)
@@ -140,6 +134,11 @@ func (location AwaitLockedLocation) OnClick(index int) {
 		}
 	}
 
-	location.Subgame.SetLocation(location.Subgame.GlobalLocations["bulk"])
+	// sorry mom, I'm used java
+	location.Subgame.SetLayoutName("main_layout")
+	location.Subgame.SwitchLayout()
+
+	location.Subgame.SetLocation(location.Subgame.GlobalLocations["bunk"])
+	log.Printf("%#v", location.Subgame)
 	location.Subgame.SwitchLocation()
 }

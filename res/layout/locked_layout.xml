@@ -22,42 +22,42 @@
             android:rowCount="3">
 
         <ToggleButton
-                android:textOn="🔒"
-                android:textOff=" "
+                android:textOn="X"
+                android:textOff="O"
                 android:id="@+id/toggle_button_1" />
         <ToggleButton
-                android:textOn="🔒"
-                android:textOff=" "
+                android:textOn="X"
+                android:textOff="O"
                 android:id="@+id/toggle_button_2" />
         <ToggleButton
-                android:textOn="🔒"
-                android:textOff=" "
+                android:textOn="X"
+                android:textOff="O"
                 android:id="@+id/toggle_button_3" />
 
         <ToggleButton
-                android:textOn="🔒"
-                android:textOff=" "
+                android:textOn="X"
+                android:textOff="O"
                 android:id="@+id/toggle_button_4" />
         <ToggleButton
-                android:textOn="🔒"
-                android:textOff=" "
+                android:textOn="X"
+                android:textOff="O"
                 android:id="@+id/toggle_button_5" />
         <ToggleButton
-                android:textOn="🔒"
-                android:textOff=" "
+                android:textOn="X"
+                android:textOff="O"
                 android:id="@+id/toggle_button_6" />
 
         <ToggleButton
-                android:textOn="🔒"
-                android:textOff=" "
+                android:textOn="X"
+                android:textOff="O"
                 android:id="@+id/toggle_button_7" />
         <ToggleButton
-                android:textOn="🔒"
-                android:textOff=" "
+                android:textOn="X"
+                android:textOff="O"
                 android:id="@+id/toggle_button_8" />
         <ToggleButton
-                android:textOn="🔒"
-                android:textOff=" "
+                android:textOn="X"
+                android:textOff="O"
                 android:id="@+id/toggle_button_9" />
     </GridLayout>
 </RelativeLayout>

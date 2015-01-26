@@ -41,6 +41,9 @@ func (game *Game) IncrementMoveCounter() {
 }
 
 func (game *Game) SetLocation(location Location) {
+	if location == nil {
+		log.Printf("%#v", "!!!!LOCATION IS NIL")
+	}
 	game.state.Location = location
 }
 
@@ -73,7 +76,6 @@ func (game *Game) ClearViews() {
 }
 
 func (game *Game) SwitchLocation() {
-	log.Printf("game.go:80 %#v", game)
 	game.ClearViews()
 
 	location := game.state.Location
@@ -85,7 +87,6 @@ func (game *Game) SwitchLocation() {
 
 	linkedLocations := location.GetLinkedLocations()
 	for _, linkedLocation := range linkedLocations {
-		log.Printf("game.go:90 %#v", linkedLocation)
 		button := game.CreateView("android.widget.Button").(sdk.Button)
 		android.SetTextFromHtml(button, linkedLocation.GetButtonTitle())
 
