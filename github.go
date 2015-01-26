@@ -20,7 +20,7 @@ func (subgame GithubSubgame) Enter(state *State) {
 
 	subgame.Subgame.Enter(state)
 
-	android.OpenWebPage("http://github.com/seletskiy/tell")
+	android.OpenWebPage("http://github.com/seletskiy/tlen")
 
 	//subgame.SetLayoutName("main_layout")
 	//subgame.SetLocation(&BaseLocation{
