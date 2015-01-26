@@ -18,18 +18,18 @@ const Cat = `<font color="green">春</font>`
 func initLocations() map[string]Location {
 	locations := make(map[string]Location)
 
-	githubMessage := `Visit our github repo to get the latest version
-		http://github.com/seletskiy/tlen`
+	githubMessage := `<p>Visit our github repo to get the latest version.</p>
+<p>http://github.com/seletskiy/tlen</p>`
 
-	locations["github"] = NewTestLocation("In development", githubMessage)
+	locations["github"] = &GithubSubgame{}
 
 	locations["bunk"] = NewTestLocation(
 		"Go to bunk",
 		"<p>It's yours family bunk.</p>"+
-			"<p>You see "+Cat+".</p>"+
+		"<p>You see "+Cat+".</p>"+
 			"<p>You see your dad watching TV.</p>"+
 			"<p>There are door to ship lobby.</p>",
-	}
+	)
 
 	locations["lobby"] = NewTestLocation("Go to lobby", "You enter the lobby")
 	locations["din"] = NewTestLocation("Go to dinnary", "Dinnay")
@@ -70,7 +70,6 @@ func initLocations() map[string]Location {
 	}
 
 	locations["wakeup_father_subgame"] = &WakeUpFatherSubgame{
-		NextLocation: locations["bunk"],
 		NextLocation: locations["github"],
 	}
 
@@ -95,7 +94,8 @@ func initLocations() map[string]Location {
 
 	// go to lobby, if not to github
 	locations["github"].Link(locations["lobby"])
-
+	locations["wakeup_father_subgame"].Link(locations["github"])
+	locations["lobby"].Link(locations["github"])
 	//locations["bunk"].Link(locations["father2"])
 
 	//locations["lobby"].Link(locations["woman2"])
